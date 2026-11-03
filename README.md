@@ -1,10 +1,14 @@
-# ScienceCUA
+<a name="sciencecua"></a>
+
+# 🔬 ScienceCUA
 
 **Resource-to-Skill Construction for Scientific Computer Use Agents**
 
 Turn scientific software documentation into reusable Skills and queryable References.
 
-## Overview
+<a name="overview"></a>
+
+## 🧭 Overview
 
 ScienceCUA equips computer-use agents with scientific software expertise through
 Resource-to-Skill construction and execution-guided skill self-evolution.
@@ -18,7 +22,9 @@ shortcuts, into queryable **References**.
 
 ![ScienceCUA framework: Resource-to-Skill construction and execution-guided skill self-evolution.](assets/method.png)
 
-## Quick Start
+<a name="quick-start"></a>
+
+## 🚀 Quick Start
 
 Requires Python 3.11 or newer and access to a model API that supports tool calling.
 Installation and startup have been verified on Windows with Python 3.12.
@@ -46,7 +52,9 @@ files or URLs directly.
 Generated entries and audit files are saved under `output/`. Source captures and
 run state are stored under `data/`. Both directories are local and excluded from Git.
 
-## Release Scope
+<a name="release-scope"></a>
+
+## 📦 Release Scope
 
 This release includes the **Resource-to-Skill** stage: PDF/HTML source processing,
 automatic manual discovery, a local web interface, a command-line runner, and
@@ -55,7 +63,9 @@ Skill/Reference construction and export.
 Execution-guided skill self-evolution and the benchmark components described in
 the paper are planned for future releases.
 
-## Acknowledgments
+<a name="acknowledgments"></a>
+
+## 🙏 Acknowledgments
 
 The Resource-to-Skill pipeline of ScienceCUA is built on **DeepSeek Harness SDK
 and its native runtime**. We thank the DeepSeek Harness team for providing the
