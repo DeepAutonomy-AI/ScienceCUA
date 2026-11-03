@@ -1,6 +1,7 @@
 # ScienceCUA
 
 [![Project Page](https://img.shields.io/badge/Project_Page-ScienceCUA-007EC6?style=flat-square)](https://hszd-team.github.io/ScienceCUA-website/)
+[![Paper](https://img.shields.io/badge/Paper-arXiv%3A%202611.03238-B31B1B?style=flat-square&logo=arxiv)](https://arxiv.org/abs/2611.03238)
 [![Benchmark Environment](https://img.shields.io/badge/Benchmark_Environment-Hugging_Face-FFD21E?style=flat-square&logo=huggingface)](https://huggingface.co/lidaiqiang/ScienceBoard_Verified_Env)
 
 **Resource-to-Skill Construction for Scientific Computer Use Agents**
