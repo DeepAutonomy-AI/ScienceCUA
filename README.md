@@ -54,3 +54,17 @@ Skill/Reference construction and export.
 
 Execution-guided skill self-evolution and the benchmark components described in
 the paper are planned for future releases.
+
+## Acknowledgments
+
+The Resource-to-Skill pipeline of ScienceCUA is built on **DeepSeek Harness SDK
+and its native runtime**. We thank the DeepSeek Harness team for providing the
+infrastructure for agent execution, session management, and tool calling.
+
+We thank **FastAPI, PyMuPDF, pypdf, Beautiful Soup**, and other open-source
+projects and their contributors for supporting the web services and PDF/HTML
+source processing in this project.
+
+We also thank the developers and documentation authors of scientific software.
+Their manuals, tutorials, and technical documentation provide the knowledge
+foundation for constructing Skills and References from source resources.
