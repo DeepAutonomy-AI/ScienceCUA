@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ScienceCUA</title>
+  <link rel="stylesheet" href="/static/styles.css?v=20261101-reference-layout">
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+  <script src="/static/app.js?v=20261101-reference-layout" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-block">
+      <span class="brand-mark">
+        <img src="/static/deepautonomy-logo.png" alt="DeepAutonomy" width="2363" height="2363">
+      </span>
+    </div>
+    <h1 class="brand-wordmark" aria-label="ScienceCUA">Science<span class="brand-acronym">CUA</span></h1>
+    <div class="topbar-controls">
+      <div class="language-switch" role="group" aria-label="Page language" data-i18n-aria="Page language">
+        <button type="button" data-language="English" aria-pressed="true">English</button>
+        <button type="button" data-language="Chinese" aria-pressed="false">中文</button>
+      </div>
+      <div class="service-status" id="service-status">
+        <span class="status-dot"></span>
+        <span data-i18n="Connecting">Connecting</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="workspace">
+    <aside class="setup-panel">
+      <form id="run-form" novalidate>
+        <section class="form-section" id="target-environment">
+          <div class="section-heading">
+            <h2 data-i18n="Target Environment">Target Environment</h2>
+          </div>
+          <label class="field full">
+            <span data-i18n="Software">Software</span>
+            <input name="software_name" required autocomplete="off">
+          </label>
+          <div class="field-grid">
+            <label class="field">
+              <span data-i18n="Target Version">Target Version</span>
+              <input name="target_version" required autocomplete="off">
+            </label>
+            <label class="field">
+              <span data-i18n="Platform">Platform</span>
+              <select name="platform" required>
+                <option value="" disabled selected data-i18n="Select platform">Select platform</option>
+                <option value="General" data-i18n="General">General</option>
+                <option>Windows</option>
+                <option>macOS</option>
+                <option>Linux</option>
+              </select>
+            </label>
+          </div>
+          <button class="secondary-action setup-next" id="continue-to-sources" type="button" data-i18n="Next: choose material">Next: choose material</button>
+        </section>
+
+        <section class="form-section sources-configuration" id="sources-configuration" hidden>
+          <div class="section-heading">
+            <h2 data-i18n="Sources">Sources</h2>
+            <span class="source-readiness" id="source-count" data-state="empty" data-i18n="Add material">Add material</span>
+          </div>
+          <button class="source-mode-picker" id="change-source-mode" type="button" aria-haspopup="dialog">
+            <i data-lucide="folder-input" aria-hidden="true"></i>
+            <span id="source-mode-label" data-i18n="Your own material">Your own material</span>
+            <i data-lucide="chevron-down" aria-hidden="true"></i>
+          </button>
+          <p class="setup-hint" id="source-mode-hint"></p>
+          <div class="source-guide" id="source-guide" hidden><span data-i18n="Choose a file or paste a link to get started.">Choose a file or paste a link to get started.</span></div>
+          <div id="manual-source-inputs">
+            <div class="manual-input-switch" role="group" aria-label="Material input method" data-i18n-aria="Material input method">
+              <button type="button" data-source-input="file" aria-pressed="true" aria-controls="file-source-panel"><i data-lucide="upload" aria-hidden="true"></i><span data-i18n="Upload file">Upload file</span></button>
+              <button type="button" data-source-input="url" aria-pressed="false" aria-controls="url-source-panel"><i data-lucide="link" aria-hidden="true"></i><span data-i18n="Paste link">Paste link</span></button>
+            </div>
+            <div id="file-source-panel" class="source-input-panel">
+              <input id="file-input" type="file" accept=".pdf,.html,.htm" hidden>
+              <button class="dropzone" id="dropzone" type="button">
+                <span class="upload-visual" aria-hidden="true"><span class="format-tile format-pdf"><i data-lucide="file-text"></i><span>PDF</span></span><span class="format-tile format-html"><i data-lucide="file-code-2"></i><span>HTML</span></span></span>
+                <span class="upload-copy"><strong data-i18n="Drop your manual here">Drop your manual here</strong><small data-i18n="PDF or HTML · Click to browse">PDF or HTML · Click to browse</small></span>
+              </button>
+              <div class="source-list" id="file-list"></div>
+              <button id="replace-file" class="text-button source-replace" type="button" hidden><i data-lucide="refresh-cw" aria-hidden="true"></i><span data-i18n="Replace file">Replace file</span></button>
+            </div>
+            <div id="url-source-panel" class="source-input-panel" hidden>
+              <div class="url-list" id="url-list"></div>
+              <p class="source-input-help" data-i18n="Paste a manual URL or a file:/// path.">Paste a manual URL or a file:/// path.</p>
+            </div>
+          </div>
+          <button class="secondary-action setup-next" id="continue-to-model" type="button" data-i18n="Next: configure model" hidden>Next: configure model</button>
+        </section>
+
+        <details class="form-section model-configuration" id="model-configuration" hidden>
+          <summary class="section-heading">
+            <span class="model-configuration-heading"><span class="model-configuration-icon" aria-hidden="true"><i data-lucide="settings-2"></i></span><span class="model-configuration-copy"><h2 data-i18n="Model Configuration">Model Configuration</h2><small id="model-summary" data-i18n="Choose a model">Choose a model</small></span></span>
+            <span class="model-configuration-end"><span id="model-configuration-state" class="model-configuration-state" data-state="empty" data-i18n="Set up">Set up</span><span class="model-configuration-toggle" aria-hidden="true"></span></span>
+          </summary>
+          <div class="api-fields" id="api-fields">
+            <p class="setup-hint" id="model-configuration-hint" hidden data-i18n="Configure your model below. The pipeline will search for PDF or HTML manuals after you click Generate.">Configure your model below. The pipeline will search for PDF or HTML manuals after you click Generate.</p>
+            <label class="field full">
+              <span data-i18n="Base URL">Base URL</span>
+              <input name="api_base_url" autocomplete="url" required>
+            </label>
+            <label class="field full">
+              <span data-i18n="Protocol">Protocol</span>
+              <span class="select-control">
+                <select name="api_protocol">
+                  <option value="" selected data-i18n="Automatic">Automatic</option>
+                  <option value="chat_completions">Chat Completions</option>
+                  <option value="responses">Responses</option>
+                </select>
+              </span>
+            </label>
+            <label class="field full">
+              <span data-i18n="Model">Model</span>
+              <input name="api_model" placeholder="Model identifier from your provider" autocomplete="off" required data-i18n-placeholder="Model identifier from your provider">
+            </label>
+            <label class="field full">
+              <span data-i18n="Reasoning Effort">Reasoning Effort</span>
+              <span class="select-control">
+                <select name="reasoning_effort">
+                  <option value="" selected data-i18n="Default">Default</option>
+                  <option value="none" data-i18n="none">none</option>
+                  <option value="low" data-i18n="low">low</option>
+                  <option value="medium" data-i18n="medium">medium</option>
+                  <option value="high" data-i18n="high">high</option>
+                  <option value="xhigh" data-i18n="xhigh">xhigh</option>
+                  <option value="max" data-i18n="max">max</option>
+                </select>
+              </span>
+            </label>
+            <label class="field full">
+              <span data-i18n="API Key">API Key</span>
+              <input name="api_key" type="password" placeholder="Used in memory for this run only" autocomplete="off" data-i18n-placeholder="Used in memory for this run only">
+            </label>
+          </div>
+        </details>
+
+        <section class="form-section generation-coverage" id="generation-coverage" data-level="medium" aria-labelledby="generation-coverage-title" hidden>
+          <div class="coverage-heading">
+            <h2 id="generation-coverage-title" data-i18n="Generation Coverage">Generation Coverage</h2>
+          </div>
+          <input id="generation-coverage-value" type="hidden" name="generation_coverage" value="medium">
+          <div class="coverage-slider-shell">
+            <div class="coverage-track" aria-hidden="true"><span class="coverage-track-fill"></span><span class="coverage-particles"></span></div>
+            <input class="coverage-range" id="generation-coverage-slider" type="range" min="0" max="3" step="1" value="1" aria-label="Generation Coverage" data-i18n-aria="Generation Coverage" aria-describedby="generation-coverage-help">
+            <span class="coverage-thumb-track" aria-hidden="true"><span class="coverage-thumb"></span></span>
+          </div>
+          <div class="coverage-levels" role="group" aria-label="Generation Coverage" data-i18n-aria="Generation Coverage">
+            <button type="button" data-coverage-level="low" aria-pressed="false" data-i18n="Low">Low</button>
+            <button type="button" data-coverage-level="medium" aria-pressed="true" data-i18n="Medium">Medium</button>
+            <button type="button" data-coverage-level="high" aria-pressed="false" data-i18n="High">High</button>
+            <button type="button" data-coverage-level="ultra" aria-pressed="false" data-i18n="Ultra">Ultra</button>
+          </div>
+          <p class="coverage-help" id="generation-coverage-help" data-i18n="Higher coverage increases API costs and takes longer.">Higher coverage increases API costs and takes longer.</p>
+        </section>
+
+        <button class="primary-action" id="run-button" type="submit" hidden>
+          <i data-lucide="play" aria-hidden="true"></i>
+          <span data-i18n="Generate">Generate</span>
+        </button>
+        <p class="form-error" id="form-error" role="alert" aria-atomic="true"></p>
+      </form>
+
+      <section class="recent-section">
+        <div class="section-heading">
+          <h2 data-i18n="Recent Runs">Recent Runs</h2>
+          <button class="icon-button" id="refresh-runs" type="button" title="Refresh" aria-label="Refresh recent runs" data-i18n-title="Refresh" data-i18n-aria="Refresh recent runs">
+            <i data-lucide="refresh-cw" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="recent-list" id="recent-list"></div>
+      </section>
+    </aside>
+
+    <main class="result-panel">
+      <div class="empty-state" id="empty-state">
+        <i data-lucide="scan-search" aria-hidden="true"></i>
+        <h2 data-i18n="No Run Selected">No Run Selected</h2>
+      </div>
+
+      <div class="run-loading-skeleton" id="run-loading" hidden role="status" aria-busy="true">
+        <span class="run-skeleton-loading-label" data-i18n="Loading run…">Loading run…</span>
+        <div class="run-skeleton-header" aria-hidden="true"><span class="skeleton-shape skeleton-title"></span><span class="skeleton-shape skeleton-chip"></span></div>
+        <div class="run-skeleton-progress result-skeleton-card" aria-hidden="true">
+          <span class="skeleton-shape skeleton-line skeleton-line-short"></span>
+          <span class="skeleton-shape skeleton-progress-track"></span>
+          <div class="skeleton-tab-row"><span class="skeleton-shape skeleton-tab"></span><span class="skeleton-shape skeleton-tab"></span><span class="skeleton-shape skeleton-tab"></span><span class="skeleton-shape skeleton-tab"></span></div>
+        </div>
+        <div class="skeleton-tab-row" aria-hidden="true"><span class="skeleton-shape skeleton-tab"></span><span class="skeleton-shape skeleton-tab"></span><span class="skeleton-shape skeleton-tab"></span></div>
+        <div class="result-skeleton-cards" aria-hidden="true">
+          <div class="result-skeleton-card"><div class="skeleton-card-heading"><span class="skeleton-shape skeleton-square"></span><span class="skeleton-shape skeleton-title"></span></div><span class="skeleton-shape skeleton-line"></span><span class="skeleton-shape skeleton-line skeleton-line-short"></span></div>
+          <div class="result-skeleton-card"><div class="skeleton-card-heading"><span class="skeleton-shape skeleton-square"></span><span class="skeleton-shape skeleton-title"></span></div><span class="skeleton-shape skeleton-line"></span><span class="skeleton-shape skeleton-line skeleton-line-short"></span></div>
+        </div>
+      </div>
+
+      <div class="run-view" id="run-view" hidden>
+        <header class="run-header">
+          <div>
+            <div class="run-title-line">
+              <h2 id="run-title" data-i18n="Run Results">Run Results</h2>
+              <span class="status-badge pending" id="run-status" data-i18n="queued">queued</span>
+            </div>
+          </div>
+          <div class="run-actions">
+            <button class="cache-run-button" id="rerun-reference-button" type="button" hidden title="Create a new Run from this frozen T5 snapshot and continue through Reference, Tasks, Trajectories, and Skills" data-i18n-title="Create a new Run from this frozen T5 snapshot and continue through Reference, Tasks, Trajectories, and Skills">
+              <i data-lucide="database-zap" aria-hidden="true"></i>
+              <span data-i18n="Run Full Pipeline from T5">Run Full Pipeline from T5</span>
+            </button>
+            <button class="stop-run-button" id="cancel-run-button" type="button" hidden>
+              <i data-lucide="square" aria-hidden="true"></i>
+              <span data-i18n="Stop Run">Stop Run</span>
+            </button>
+          </div>
+        </header>
+
+        <div class="selection-notice" id="source-selection-notice" hidden>
+          <p id="source-selection-notice-text"></p>
+          <button class="secondary-action" id="open-source-candidates" type="button" data-i18n="Choose material">Choose material</button>
+        </div>
+        <div class="selection-notice" id="scope-selection-notice" hidden>
+          <p id="scope-selection-notice-text"></p>
+          <button class="secondary-action" id="open-source-scope" type="button" data-i18n="Choose chapters">Choose chapters</button>
+        </div>
+        <p class="credential-notice" id="credential-notice" hidden data-i18n="The server needs your model API Key again. Enter it in Model Configuration before continuing.">The server needs your model API Key again. Enter it in Model Configuration before continuing.</p>
+
+        <div class="progress-band">
+          <div class="progress-meta">
+            <div class="progress-heading">
+              <span class="progress-eyebrow" data-i18n="Pipeline progress">Pipeline progress</span>
+              <span id="stage-label" data-i18n="Registered">Registered</span>
+            </div>
+            <div class="progress-summary">
+              <strong id="progress-label">0%</strong>
+              <span id="progress-status" data-i18n="Queued">Queued</span>
+            </div>
+          </div>
+          <div class="progress-track" role="progressbar" aria-label="Overall pipeline progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-i18n-aria="Overall pipeline progress"><span id="progress-fill"></span></div>
+          <div class="stage-rail" id="stage-rail" role="list" aria-label="Pipeline stages" data-i18n-aria="Pipeline stages">
+            <div class="stage-step" data-stage="source_evidence" role="listitem">
+              <div class="stage-copy"><span class="stage-title" data-i18n="Source &amp; Evidence Build">Source &amp; Evidence Build</span><span class="stage-status" data-i18n="Pending">Pending</span></div>
+            </div>
+            <div class="stage-step" data-stage="reference_build" role="listitem">
+              <div class="stage-copy"><span class="stage-title" data-i18n="Reference Build">Reference Build</span><span class="stage-status" data-i18n="Pending">Pending</span></div>
+            </div>
+            <div class="stage-step" data-stage="task_trajectory" role="listitem">
+              <div class="stage-copy"><span class="stage-title" data-i18n="Task &amp; Trajectory Generation">Task &amp; Trajectory Generation</span><span class="stage-status" data-i18n="Pending">Pending</span></div>
+            </div>
+            <div class="stage-step" data-stage="skill_induction" role="listitem">
+              <div class="stage-copy"><span class="stage-title" data-i18n="Skill Generation">Skill Generation</span><span class="stage-status" data-i18n="Pending">Pending</span></div>
+            </div>
+          </div>
+        </div>
+
+        <nav class="tabs" aria-label="Run result views" data-i18n-aria="Run result views">
+          <button class="tab active" type="button" data-tab="sources" aria-current="page">
+            <span class="tab-icon" aria-hidden="true"><i data-lucide="folder-open"></i></span><span data-i18n="Sources">Sources</span>
+          </button>
+          <button class="tab" type="button" data-tab="evidence">
+            <span class="tab-icon" aria-hidden="true"><i data-lucide="file-search"></i></span><span data-i18n="Evidence">Evidence</span>
+          </button>
+          <button class="tab" type="button" data-tab="reference">
+            <span class="tab-icon" aria-hidden="true"><i data-lucide="book-open"></i></span><span data-i18n="Reference">Reference</span>
+          </button>
+          <button class="tab" type="button" data-tab="task-trajectory">
+            <span class="tab-icon" aria-hidden="true"><i data-lucide="workflow"></i></span><span data-i18n="Task and Trajectory">Task and Trajectory</span>
+          </button>
+          <button class="tab" type="button" data-tab="skills">
+            <span class="tab-icon" aria-hidden="true"><i data-lucide="puzzle"></i></span><span data-i18n="Skills">Skills</span>
+          </button>
+          <button class="tab" type="button" data-tab="audit">
+            <span class="tab-icon" aria-hidden="true"><i data-lucide="scroll-text"></i></span><span data-i18n="Audit Trail">Audit Trail</span>
+          </button>
+        </nav>
+
+        <section class="tab-panel active" id="tab-sources">
+          <div class="table-scroll">
+            <table class="source-table">
+              <thead>
+                <tr><th data-i18n="Source">Source</th><th data-i18n="Modality">Modality</th><th data-i18n="Version">Version</th><th data-i18n="Origin">Origin</th></tr>
+              </thead>
+              <tbody id="source-table-body"></tbody>
+            </table>
+          </div>
+          <div class="waiting-block" id="source-waiting" data-i18n="Waiting for source results">Waiting for source results</div>
+        </section>
+
+        <section class="tab-panel" id="tab-evidence">
+          <div class="filter-bar">
+            <div class="evidence-view-switch" role="group" aria-label="Evidence view" data-i18n-aria="Evidence view">
+              <button class="active" type="button" data-evidence-view="tree" aria-pressed="true">
+                <span data-i18n="Evidence Tree">Evidence Tree</span> <span id="evidence-tree-count">0</span>
+              </button>
+              <button type="button" data-evidence-view="flat" aria-pressed="false">
+                <span data-i18n="Flat Evidence">Flat Evidence</span> <span id="evidence-flat-count">0</span>
+              </button>
+            </div>
+            <label class="search-field">
+              <i data-lucide="search" aria-hidden="true"></i>
+              <input id="evidence-filter" placeholder="Filter tree nodes, content, or sources" data-i18n-placeholder="Filter tree nodes, content, or sources">
+            </label>
+            <select id="evidence-modality" aria-label="Filter by modality" data-i18n-aria="Filter by modality">
+              <option value="all" data-i18n="All modalities">All modalities</option>
+              <option value="pdf">PDF</option>
+              <option value="html">HTML</option>
+            </select>
+          </div>
+          <div class="evidence-tree-list" id="evidence-tree-list"></div>
+          <div class="evidence-list" id="evidence-list" hidden></div>
+        </section>
+
+        <section class="tab-panel" id="tab-reference">
+          <div class="section-heading"><h3 data-i18n="References">References</h3><span class="count-label" id="reference-count">0</span></div>
+          <div class="knowledge-list" id="reference-list"></div>
+        </section>
+
+        <section class="tab-panel" id="tab-task-trajectory">
+          <div class="task-trajectory-columns">
+            <section class="task-trajectory-column">
+              <div class="section-heading"><h3 data-i18n="Tasks">Tasks</h3><span class="count-label" id="task-count">0</span></div>
+              <div class="knowledge-list" id="task-list"></div>
+            </section>
+            <section class="task-trajectory-column">
+              <div class="section-heading"><h3 data-i18n="Trajectories">Trajectories</h3><span class="count-label" id="trajectory-count">0</span></div>
+              <div class="knowledge-list" id="trajectory-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="tab-panel" id="tab-skills">
+          <div class="skills-list" id="skills-list"></div>
+        </section>
+
+        <section class="tab-panel" id="tab-audit">
+          <div class="audit-toolbar">
+            <div class="audit-filters" id="audit-filters">
+              <button class="filter-chip active" type="button" data-level="all" data-i18n="All">All</button>
+              <button class="filter-chip" type="button" data-level="tool" data-i18n="Tools">Tools</button>
+              <button class="filter-chip" type="button" data-level="model" data-i18n="Model">Model</button>
+              <button class="filter-chip" type="button" data-level="error" data-i18n="Errors">Errors</button>
+            </div>
+            <label class="toggle-row compact">
+              <input id="audit-follow" type="checkbox" checked>
+              <span data-i18n="Auto-follow">Auto-follow</span>
+            </label>
+          </div>
+          <div class="audit-list" id="audit-list"></div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <dialog class="source-choice-dialog" id="source-mode-dialog" aria-labelledby="source-mode-dialog-title">
+    <div class="source-choice-shell">
+      <div class="dialog-heading-row">
+        <h2 id="source-mode-dialog-title" tabindex="-1" autofocus data-i18n="Have you prepared PDF or HTML material?">Have you prepared PDF or HTML material?</h2>
+        <div class="language-switch" role="group" aria-label="Page language" data-i18n-aria="Page language">
+          <button type="button" data-language="English" aria-pressed="true">English</button>
+          <button type="button" data-language="Chinese" aria-pressed="false">中文</button>
+        </div>
+      </div>
+      <p data-i18n="Choose how to provide one manual for this run.">Choose how to provide one manual for this run.</p>
+      <button class="text-button setup-back" id="source-mode-back" type="button" data-i18n="Back to Target Environment">Back to Target Environment</button>
+      <button class="source-mode-option" id="choose-manual-source" type="button">
+        <span class="choice-letter" aria-hidden="true">A</span>
+        <span><strong data-i18n="I have prepared material">I have prepared material</strong><small data-i18n="Upload one PDF or HTML file, or enter a manual URL.">Upload one PDF or HTML file, or enter a manual URL.</small></span>
+        <i data-lucide="arrow-right" aria-hidden="true"></i>
+      </button>
+      <button class="source-mode-option" id="choose-discovery-source" type="button">
+        <span class="choice-letter" aria-hidden="true">B</span>
+        <span><strong data-i18n="I have not prepared material">I have not prepared material</strong><small data-i18n="The pipeline will search for manuals after you configure your model.">The pipeline will search for manuals after you configure your model.</small></span>
+        <i data-lucide="search" aria-hidden="true"></i>
+      </button>
+    </div>
+  </dialog>
+
+  <dialog class="source-candidates-dialog" id="source-candidates-dialog" aria-labelledby="source-candidates-dialog-title">
+    <form class="source-candidates-shell" id="source-candidates-form">
+      <header class="dialog-heading-row">
+        <div><p class="dialog-kicker" data-i18n="Manual search">Manual search</p><h2 id="source-candidates-dialog-title" data-i18n="Choose one manual to continue">Choose one manual to continue</h2></div>
+        <button class="icon-button" id="source-candidates-close" type="button" title="Close" aria-label="Close" data-i18n-title="Close" data-i18n-aria="Close"><i data-lucide="x" aria-hidden="true"></i></button>
+      </header>
+      <p id="source-candidates-summary"></p>
+      <p id="source-candidates-notice" role="status" hidden></p>
+      <div class="source-candidates-list" id="source-candidates-list"></div>
+      <label class="field full candidate-key-field" id="candidate-api-key-field" hidden><span data-i18n="Model API Key">Model API Key</span><input id="candidate-api-key" type="password" autocomplete="off" placeholder="Re-enter your model API Key" data-i18n-placeholder="Re-enter your model API Key"></label>
+      <p class="candidate-model-route" id="candidate-model-route" hidden></p>
+      <p class="form-error" id="source-candidates-error" role="alert"></p>
+      <div class="source-candidates-footer">
+        <button class="text-button" id="source-candidates-manual" type="button" data-i18n="Use my own material">Use my own material</button>
+        <button class="secondary-action" id="source-candidates-retry" type="button" data-i18n="Search again">Search again</button>
+        <button class="candidate-continue" id="source-candidates-continue" type="submit" data-i18n="Use this material and continue">Use this material and continue</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="source-scope-dialog" id="source-scope-dialog" aria-labelledby="source-scope-dialog-title">
+    <form class="source-scope-shell" id="source-scope-form">
+      <header class="dialog-heading-row">
+        <div><p class="dialog-kicker" data-i18n="Extraction scope">Extraction scope</p><h2 id="source-scope-dialog-title" data-i18n="Which chapters do you need?">Which chapters do you need?</h2></div>
+        <button class="icon-button" id="source-scope-close" type="button" title="Close" aria-label="Close" data-i18n-title="Close" data-i18n-aria="Close"><i data-lucide="x" aria-hidden="true"></i></button>
+      </header>
+      <p class="scope-source-title" id="source-scope-summary"></p>
+      <p class="scope-introduction" data-i18n="Choose the whole material or first-level chapters. Each selected chapter includes all its subsections.">Choose the whole material or first-level chapters. Each selected chapter includes all its subsections.</p>
+      <fieldset class="scope-mode-options">
+        <legend data-i18n="Extraction scope">Extraction scope</legend>
+        <label><input id="scope-mode-full" type="radio" name="scope_mode" value="full" checked><span><strong data-i18n="Whole material">Whole material</strong><small data-i18n="Extract knowledge across all chapters.">Extract knowledge across all chapters.</small></span></label>
+        <label><input id="scope-mode-selected" type="radio" name="scope_mode" value="selected"><span><strong data-i18n="Selected chapters">Selected chapters</strong><small data-i18n="Choose one or more first-level chapters below.">Choose one or more first-level chapters below.</small></span></label>
+      </fieldset>
+      <p class="scope-help" id="source-scope-unavailable" hidden data-i18n="A reliable chapter outline could not be identified. You can continue with the whole material.">A reliable chapter outline could not be identified. You can continue with the whole material.</p>
+      <p class="scope-help" id="source-scope-budget" hidden></p>
+      <p class="scope-help scope-warnings" id="source-scope-warnings" role="status" hidden></p>
+      <div class="scope-section-list" id="source-scope-sections" role="group" aria-label="Chapters" data-i18n-aria="Chapters"></div>
+      <p class="scope-help" id="source-scope-selection-count" aria-live="polite" hidden></p>
+      <label class="field full candidate-key-field" id="scope-api-key-field" hidden><span data-i18n="Model API Key">Model API Key</span><input id="scope-api-key" type="password" autocomplete="off" placeholder="Re-enter your model API Key" data-i18n-placeholder="Re-enter your model API Key"></label>
+      <p class="form-error" id="source-scope-error" role="alert"></p>
+      <div class="source-candidates-footer"><button class="candidate-continue" id="source-scope-continue" type="submit" data-i18n="Confirm scope and continue">Confirm scope and continue</button></div>
+    </form>
+  </dialog>
+
+  <dialog class="reference-catalog-dialog" id="reference-catalog-dialog" aria-labelledby="reference-catalog-dialog-title">
+    <div class="reference-catalog-dialog-shell">
+      <header class="reference-catalog-dialog-header">
+        <div>
+          <p class="reference-catalog-kicker" data-i18n="Source-preserved Catalog">Source-preserved Catalog</p>
+          <h2 id="reference-catalog-dialog-title" data-i18n="Reference">Reference</h2>
+          <p class="reference-catalog-dialog-description" id="reference-catalog-dialog-description"></p>
+        </div>
+        <button class="icon-button" id="reference-catalog-dialog-close" type="button" title="Close full Reference" aria-label="Close full Reference" data-i18n-title="Close full Reference" data-i18n-aria="Close full Reference">
+          <i data-lucide="x" aria-hidden="true"></i>
+        </button>
+      </header>
+      <div class="reference-catalog-dialog-toolbar">
+        <label class="reference-catalog-search" for="reference-catalog-filter">
+          <i data-lucide="search" aria-hidden="true"></i>
+          <input id="reference-catalog-filter" type="search" placeholder="Search entry name, content, or source locator" autocomplete="off" data-i18n-placeholder="Search entry name, content, or source locator">
+        </label>
+        <span class="reference-catalog-result-count" id="reference-catalog-result-count"></span>
+      </div>
+      <div class="reference-catalog-entry-list" id="reference-catalog-entry-list"></div>
+    </div>
+  </dialog>
+
+  <dialog class="pipeline-error-dialog" id="pipeline-error-dialog" aria-labelledby="pipeline-error-dialog-title">
+    <div class="pipeline-error-dialog-shell">
+      <div class="pipeline-error-icon" aria-hidden="true">
+        <i data-lucide="circle-alert"></i>
+      </div>
+      <div class="pipeline-error-content">
+        <p class="pipeline-error-kicker" data-i18n="Pipeline Stopped">Pipeline Stopped</p>
+        <h2 id="pipeline-error-dialog-title" data-i18n="Pipeline Run Failed">Pipeline Run Failed</h2>
+        <p id="pipeline-error-dialog-message"></p>
+        <dl id="pipeline-error-dialog-details"></dl>
+      </div>
+      <button class="pipeline-error-close" id="pipeline-error-dialog-close" type="button" data-i18n="Dismiss">Dismiss</button>
+    </div>
+  </dialog>
+</body>
+</html>

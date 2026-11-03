@@ -1,0 +1,3 @@
+# Source audit fingerprints must survive checkouts without newline conversion.
+extractor.py -text
+fallback.py -text

@@ -1,0 +1,9 @@
+# Downstream and legacy sessions keep their existing capability-only surface.
+- id: persistent-bash
+  disabled: true
+- id: persistent-pwsh
+  disabled: true
+- id: str-replace-editor
+  disabled: true
+- id: tool-str-replace-editor
+  disabled: true

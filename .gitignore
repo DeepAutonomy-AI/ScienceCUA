@@ -1,0 +1,25 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+tmp/
+data/
+runtime/dsh/node_modules/
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Generated test, packaging, and run artifacts
+.pytest_tmp*/
+.test_tmp/
+output/
+experiments/
+resource_to_skill_dsh.egg-info/
+*.log
+

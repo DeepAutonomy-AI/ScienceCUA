@@ -1,0 +1,32 @@
+# The pinned Windows wheel cannot load node-pty's conpty.node. Use the shipped
+# one-shot shell stack, which starts ordinary native processes and needs no PTY.
+# The SDK filesystem and str_replace_editor remain enabled.
+- id: persistent-bash
+  disabled: true
+- id: persistent-pwsh
+  disabled: true
+- insert:
+    - id: extraction-shell-env
+      name: '@deepseek-ai/dsh-shell-env'
+    - id: extraction-pwsh-executor
+      name: '@deepseek-ai/dsh-pwsh-local'
+      disabled: !!js process.platform !== 'win32'
+      config:
+        timeoutMs: 360000
+    - id: extraction-bash-executor
+      name: '@deepseek-ai/dsh-bash-local'
+      disabled: !!js process.platform === 'win32'
+      config:
+        timeoutMs: 360000
+    - id: extraction-pwsh-tool
+      name: '@deepseek-ai/dsh-tool-pwsh'
+      disabled: !!js process.platform !== 'win32'
+      config:
+        enableRunInBackground: false
+        promoteOnTimeout: false
+    - id: extraction-bash-tool
+      name: '@deepseek-ai/dsh-tool-bash'
+      disabled: !!js process.platform === 'win32'
+      config:
+        enableRunInBackground: false
+        promoteOnTimeout: false

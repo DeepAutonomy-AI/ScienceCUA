@@ -1,0 +1,39 @@
+# Isolated discovery Child: native web tools plus the attempt-scoped submit tool.
+# No shell, editor, or downstream corpus capabilities are exposed here.
+- id: persistent-bash
+  disabled: true
+- id: persistent-pwsh
+  disabled: true
+- id: str-replace-editor
+  disabled: true
+- id: tool-str-replace-editor
+  disabled: true
+- insert:
+    # sdk-minimal does not include this policy. It enforces the web tools'
+    # timeoutMs declarations and forwards cancellation to the search/fetch backend.
+    - id: discovery-tool-timeout-policy
+      name: '@deepseek-ai/dsh-tool-call-timeout-policy'
+    - id: discovery-web
+      name: '@deepseek-ai/dsh-web'
+      config:
+        searchProvider: !!js process.env.DSH_WEB_SEARCH_PROVIDER
+        fetchProvider: http
+    - id: discovery-web-search-deepseek
+      name: '@deepseek-ai/dsh-web-search-deepseek'
+      disabled: !!js process.env.DSH_WEB_SEARCH_PROVIDER !== 'deepseek-official'
+      config:
+        apiKeyEnv: DEEPSEEK_API_KEY
+    - id: discovery-web-fetch-http
+      name: '@deepseek-ai/dsh-web-fetch-http'
+    - id: discovery-tool-web
+      name: '@deepseek-ai/dsh-tool-web'
+      config:
+        search: true
+        fetch: true
+        searchMaxResults: 12
+        searchMaxQueries: 1
+        # No separate 60-second search cutoff. The stage-wide budget cancels
+        # the Child first; retain a valid DSH tool deadline at that same budget.
+        searchTimeoutMs: !!js Math.ceil(Math.max(1, Number(process.env.PREPROCESS_DISCOVERY_TIMEOUT ?? 600)) * 1000)
+        fetchTimeoutMs: 30000
+        fetchMaxOutputChars: 120000
