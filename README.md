@@ -1,6 +1,6 @@
 <a name="sciencecua"></a>
 
-# 🔬 ScienceCUA
+# ScienceCUA
 
 **Resource-to-Skill Construction for Scientific Computer Use Agents**
 
