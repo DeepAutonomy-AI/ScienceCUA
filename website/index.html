@@ -1,0 +1,1163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ScienceCUA: Resource-to-Skill Construction and Execution-Guided Skill Evolution for Scientific Computer Use Agents.">
+    <title>ScienceCUA</title>
+    <link rel="stylesheet" href="styles.css?v=20261107-1">
+    <script src="hero-background.js?v=20261107-1" defer></script>
+    <script src="contact.js" defer></script>
+    <script src="evolution.js" defer></script>
+    <script src="knowledge.js" defer></script>
+    <script src="build-skills.js" defer></script>
+    <script src="promo-video.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="DeepAutonomy — ScienceCUA home">
+        <img src="assets/affiliations/deepautonomy.png" alt="DeepAutonomy" width="1772" height="366">
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <button class="nav-contact" id="contact-trigger" type="button" aria-haspopup="dialog" aria-controls="contact-dialog" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="3"/>
+            <path d="m4 7 8 6 8-6"/>
+          </svg>
+          Contact Us
+        </button>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <canvas id="science-background" class="science-background" aria-hidden="true"></canvas>
+        <div class="hero-copy">
+          <h1 id="hero-title">ScienceCUA</h1>
+          <p class="hero-text">
+            ScienceCUA is a two-stage framework that distills human-authored software manuals and web pages into executable, reusable skills, and keeps evolving them through real executions — giving computer-use agents the application-specific expertise that scientific software demands.
+          </p>
+
+          <p class="author-list">
+            Daiqiang&nbsp;Li<sup>1</sup>,
+            Jingyi&nbsp;Peng<sup>1</sup>,
+            Rui&nbsp;Hu<sup>2</sup>,
+            Jia&nbsp;Li<sup>3</sup>,
+            Xuyang&nbsp;Liu<sup>4</sup>,
+            Guanren&nbsp;Qiao<sup>1</sup>,
+            Yujia&nbsp;Xiang<sup>1</sup>,
+            Qiuzhuang&nbsp;Sun<sup>5</sup>,
+            Zhiping&nbsp;Xu<sup>1</sup>,
+            Mingrui&nbsp;Luo<sup>1,&dagger;</sup>
+          </p>
+
+          <ul class="affiliation-list" aria-label="Affiliations">
+            <li><sup>1</sup>DeepAutonomy</li>
+            <li><sup>2</sup>Peking University</li>
+            <li><sup>3</sup>College of AI, Tsinghua University</li>
+            <li><sup>4</sup>The Hong Kong Polytechnic University</li>
+            <li><sup>5</sup>Singapore Management University</li>
+          </ul>
+          <p class="author-note"><sup>&dagger;</sup>Corresponding author</p>
+
+          <ul class="logo-row" aria-label="Institution logos">
+            <li><img src="assets/affiliations/deepautonomy.png" alt="DeepAutonomy"></li>
+            <li><img src="assets/affiliations/pku.svg" alt="Peking University"></li>
+            <li><img src="assets/affiliations/tsinghua.svg" alt="Tsinghua University"></li>
+            <li><img src="assets/affiliations/polyu.png" alt="The Hong Kong Polytechnic University"></li>
+            <li><img src="assets/affiliations/smu.svg" alt="Singapore Management University"></li>
+          </ul>
+
+          <div class="hero-actions" aria-label="Primary links">
+            <a class="button primary" href="https://arxiv.org/abs/2611.03238">
+              <svg class="button-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm2 16H8v-2h8v2Zm0-4H8v-2h8v2Zm-3-5V3.5L18.5 9H13Z"/>
+              </svg>
+              Paper
+            </a>
+            <a class="button" href="https://github.com/DeepAutonomy-AI/ScienceCUA">
+              <svg class="button-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.47.11-3.05 0 0 .97-.31 3.18 1.18A11.04 11.04 0 0 1 12 5.56c.98 0 1.96.13 2.88.38 2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.18c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
+              </svg>
+              Code
+            </a>
+            <a class="button" href="https://huggingface.co/lidaiqiang/ScienceBoard_Verified_Env">
+              <span class="button-icon hf-icon" aria-hidden="true">HF</span>
+              Evaluation Environment
+            </a>
+            <button class="button build-skills-button" id="build-skills-trigger" type="button" aria-haspopup="dialog" aria-controls="build-skills-dialog" aria-expanded="false">
+              <svg class="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 8h4V6a2 2 0 0 1 4 0v2h4v4h2a2 2 0 0 1 0 4h-2v4h-4v-2a2 2 0 0 0-4 0v2H4v-4h2a2 2 0 0 0 0-4H4Z"/>
+              </svg>
+              Build Skills
+              <svg class="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M6 18 18 6M6 6h12v12"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="videos" class="promo-section" aria-labelledby="promo-title">
+        <div class="research-inner">
+          <header class="promo-heading">
+            <div>
+              <p class="promo-eyebrow">Video overview</p>
+              <h2 id="promo-title">See ScienceCUA in action.</h2>
+            </div>
+            <div class="promo-languages" role="group" aria-label="Video language">
+              <button type="button" aria-pressed="true" aria-controls="promo-video" data-video-src="assets/videos/sciencecua-en.mp4" data-video-poster="assets/videos/sciencecua-en.jpg" data-video-label="ScienceCUA promotional video in English">English</button>
+              <button type="button" lang="zh-CN" aria-pressed="false" aria-controls="promo-video" data-video-src="assets/videos/sciencecua-zh.mp4" data-video-poster="assets/videos/sciencecua-zh.jpg" data-video-label="ScienceCUA promotional video in Chinese">中文</button>
+            </div>
+          </header>
+          <div class="promo-frame">
+            <video id="promo-video" class="promo-player" controls playsinline preload="none" width="2560" height="1440" poster="assets/videos/sciencecua-en.jpg" src="assets/videos/sciencecua-en.mp4" aria-label="ScienceCUA promotional video in English">
+              Your browser does not support embedded video. Watch the <a href="assets/videos/sciencecua-en.mp4">English video</a> or the <a href="assets/videos/sciencecua-zh.mp4" lang="zh-CN">中文视频</a>.
+            </video>
+            <button id="promo-play" class="promo-play" type="button" aria-label="Play ScienceCUA promotional video in English" hidden>
+              <img src="assets/videos/sciencecua-en.jpg" width="1280" height="720" alt="">
+              <span class="promo-play-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="m8 5 11 7-11 7Z"/></svg>Play video</span>
+            </button>
+          </div>
+          <noscript>
+            <p class="promo-fallback">Watch the <a href="assets/videos/sciencecua-en.mp4">English video</a> or the <a href="assets/videos/sciencecua-zh.mp4" lang="zh-CN">中文视频</a>.</p>
+          </noscript>
+        </div>
+      </section>
+
+      <section id="motivation" class="research-section research-motivation" aria-labelledby="motivation-title">
+        <div class="research-inner">
+          <header class="research-heading">
+            <p class="research-eyebrow"><span aria-hidden="true">01 /</span> Motivation</p>
+            <h2 id="motivation-title">Rich documentation. Sparse task-relevant knowledge.</h2>
+            <p class="research-lead">
+              Scientific software comes with extensive manuals and tutorials, but a task often depends on only a few operational details. In our ScienceBoard experiments, directly injecting raw documentation offers modest gains in task success while substantially increasing execution time. ScienceCUA organizes this knowledge into focused, reusable <strong>Skills</strong> and queryable <strong>References</strong>.
+            </p>
+          </header>
+
+          <figure class="research-figure">
+            <a class="figure-surface" href="assets/figures/motivation.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open the full-resolution motivation figure as a PDF">
+              <picture>
+                <source srcset="assets/figures/motivation.webp" type="image/webp">
+                <img src="assets/figures/motivation.png" width="2800" height="1361" loading="lazy" decoding="async" alt="Motivation for ScienceCUA: six scientific applications and their documentation, human-oriented narrative content, sparse task-relevant evidence, and success-rate and execution-time comparisons for direct resource injection.">
+              </picture>
+            </a>
+          </figure>
+        </div>
+      </section>
+
+      <section id="pipeline" class="research-section research-pipeline" aria-labelledby="pipeline-title">
+        <div class="research-inner">
+          <header class="research-heading">
+            <p class="research-eyebrow"><span aria-hidden="true">02 /</span> Pipeline</p>
+            <h2 id="pipeline-title">Construct from resources. Evolve through execution.</h2>
+            <p class="research-lead">
+              ScienceCUA first builds a library from software documentation, then refines it using feedback from real software execution. Skills and References evolve outside the model parameters, and candidate knowledge updates undergo independent validation before entering the final library.
+            </p>
+          </header>
+
+          <ol class="pipeline-steps" aria-label="The two stages of ScienceCUA">
+            <li>
+              <span class="pipeline-step-label">Stage 1</span>
+              <h3>Resource-to-Skill Construction</h3>
+              <p>Organize PDF/HTML documentation into traceable evidence. Extract shared References and induce reusable Skills through task discovery and trajectory inference.</p>
+            </li>
+            <li>
+              <span class="pipeline-step-label">Stage 2</span>
+              <h3>Execution-Guided Skill Evolution</h3>
+              <p>Use failure history to guide exploration, revise faulty knowledge or add source-supported entries, and validate candidates in reset environments and fresh sessions.</p>
+            </li>
+          </ol>
+
+          <figure class="research-figure">
+            <a class="figure-surface" href="assets/figures/pipeline.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open the full-resolution ScienceCUA pipeline figure as a PDF">
+              <picture>
+                <source srcset="assets/figures/pipeline.webp" type="image/webp">
+                <img src="assets/figures/pipeline.png" width="2800" height="1079" loading="lazy" decoding="async" alt="The ScienceCUA pipeline: source-grounded construction of Skills and References, followed by execution-guided skill evolution with failure diagnosis, trajectory comparison, independent validation, and consolidation into a frozen final library.">
+              </picture>
+            </a>
+          </figure>
+        </div>
+      </section>
+
+      <section id="skills-references" class="research-section research-examples" aria-labelledby="examples-title">
+        <div class="research-inner">
+          <header class="research-heading">
+            <p class="research-eyebrow"><span aria-hidden="true">03 /</span> Skills &amp; References</p>
+            <h2 id="examples-title">Reusable workflows. Knowledge on demand.</h2>
+            <p class="research-lead">
+              Skills provide reusable, task-level procedures. References supply shared syntax, parameters, and constraints for on-demand lookup. Explore six examples from the ScienceCUA library, pairing a concrete workflow with related software knowledge.
+            </p>
+          </header>
+
+          <!-- knowledge-examples:start -->
+          <div class="knowledge-explorer">
+            <div class="knowledge-tabs" role="tablist" aria-label="Choose an application to explore its Skill and Reference" hidden>
+              <button id="knowledge-tab-kalgebra" type="button" role="tab" aria-selected="true" aria-controls="knowledge-panel-kalgebra" tabindex="0">KAlgebra</button>
+              <button id="knowledge-tab-celestia" type="button" role="tab" aria-selected="false" aria-controls="knowledge-panel-celestia" tabindex="-1">Celestia</button>
+              <button id="knowledge-tab-grass" type="button" role="tab" aria-selected="false" aria-controls="knowledge-panel-grass" tabindex="-1">GRASS GIS</button>
+              <button id="knowledge-tab-chimerax" type="button" role="tab" aria-selected="false" aria-controls="knowledge-panel-chimerax" tabindex="-1">ChimeraX</button>
+              <button id="knowledge-tab-lean" type="button" role="tab" aria-selected="false" aria-controls="knowledge-panel-lean" tabindex="-1">Lean 4</button>
+              <button id="knowledge-tab-texstudio" type="button" role="tab" aria-selected="false" aria-controls="knowledge-panel-texstudio" tabindex="-1">TeXstudio</button>
+            </div>
+
+            <div id="knowledge-panel-kalgebra" class="knowledge-panel" role="tabpanel" aria-labelledby="knowledge-tab-kalgebra" tabindex="0">
+              <div class="knowledge-panel-heading">
+                <h3>KAlgebra</h3>
+                <p>Mathematics &amp; plotting</p>
+              </div>
+              <div class="knowledge-pair">
+                <article class="knowledge-card knowledge-card-skill" aria-labelledby="knowledge-skill-kalgebra">
+                  <header class="knowledge-card-header">
+                    <strong>Skill</strong><span>Reusable procedure</span>
+                  </header>
+                  <div class="knowledge-card-body">
+                    <h4 id="knowledge-skill-kalgebra">Plot an explicit function in 3D</h4>
+                    <p class="knowledge-description">Turn a function of two variables into a 3D surface using the graph input.</p>
+                    <ol class="knowledge-steps"><li><strong>Open the 3D workspace</strong><p>Select the 3D Graph tab and locate the input field at the bottom.</p></li><li><strong>Define the surface</strong><p>Use an explicit function that depends only on x and y; z is not an input variable.</p></li><li><strong>Enter the expression</strong><p>Type the function in mapping form, such as the documented example below.</p></li></ol>
+                    <div class="knowledge-code"><span>Example expression</span><pre><code>(x,y)-&gt;sin(x)*sin(y)</code></pre></div>
+                  </div>
+                </article>
+                <article class="knowledge-card knowledge-card-reference" aria-labelledby="knowledge-reference-kalgebra">
+                  <header class="knowledge-card-header">
+                    <strong>Reference</strong><span>On-demand lookup</span>
+                  </header>
+                  <div class="knowledge-card-body">
+                    <h4 id="knowledge-reference-kalgebra">Built-in function catalog</h4>
+                    <p class="knowledge-description">Selected entries from the KAlgebra Reference: commands, parameter formats, and documented examples.</p>
+
+                    <div class="knowledge-reference-scroll" role="region" tabindex="0" aria-label="KAlgebra: Built-in function catalog"><table class="knowledge-reference-table knowledge-command-table">
+                      <caption class="sr-only">KAlgebra: Built-in function catalog</caption>
+                      <thead><tr><th scope="col">Command</th><th scope="col">Parameters</th><th scope="col">Example</th></tr></thead>
+                      <tbody><tr><th scope="row"><code>power</code></th><td><code>power(par1, par2)</code></td><td><code>x-&gt;x^2</code></td></tr><tr><th scope="row"><code>root</code></th><td><code>root(par1, par2)</code></td><td><code>x-&gt;root(x, 2)</code></td></tr><tr><th scope="row"><code>sin</code></th><td><code>sin(par1)</code></td><td><code>x-&gt;sin(x)</code></td></tr><tr><th scope="row"><code>cos</code></th><td><code>cos(par1)</code></td><td><code>x-&gt;cos(x)</code></td></tr><tr><th scope="row"><code>abs</code></th><td><code>abs(par1)</code></td><td><code>x-&gt;abs(x)</code></td></tr><tr><th scope="row"><code>diff</code></th><td><code>diff(par1 : var)</code></td><td><code>x-&gt;(diff(x^2:x))(x)</code></td></tr></tbody>
+                    </table></div>
+
+                  </div>
+                </article>
+              </div>
+            </div>
+            <div id="knowledge-panel-celestia" class="knowledge-panel" role="tabpanel" aria-labelledby="knowledge-tab-celestia" tabindex="0">
+              <div class="knowledge-panel-heading">
+                <h3>Celestia</h3>
+                <p>Astronomy &amp; simulation</p>
+              </div>
+              <div class="knowledge-pair">
+                <article class="knowledge-card knowledge-card-skill" aria-labelledby="knowledge-skill-celestia">
+                  <header class="knowledge-card-header">
+                    <strong>Skill</strong><span>Reusable procedure</span>
+                  </header>
+                  <div class="knowledge-card-body">
+                    <h4 id="knowledge-skill-celestia">Find and observe an eclipse</h4>
+                    <p class="knowledge-description">Locate a solar or lunar eclipse, travel to the event, and control its progression.</p>
+                    <ol class="knowledge-steps"><li><strong>Enable eclipse shadows</strong><p>Open Render → View Options and enable Eclipse Shadows.</p></li><li><strong>Define the search</strong><p>Open Navigation → Eclipse Finder and choose the type, planet, and date range. For Jupiter through Neptune, keep the range to one year or less.</p></li><li><strong>Travel to the event</strong><p>Click Compute, select an eclipse, then use the set-date-and-GoTo button and close the dialog.</p></li><li><strong>Control and restore time</strong><p>Press L to accelerate. Use the backslash key to restore the real-time rate, then Time → Set Time → Set to Current time to return to the present.</p></li></ol>
+
+                  </div>
+                </article>
+                <article class="knowledge-card knowledge-card-reference" aria-labelledby="knowledge-reference-celestia">
+                  <header class="knowledge-card-header">
+                    <strong>Reference</strong><span>On-demand lookup</span>
+                  </header>
+                  <div class="knowledge-card-body">
+                    <h4 id="knowledge-reference-celestia">Display and render settings</h4>
+                    <p class="knowledge-description">Shared display options, parameter ranges, and visibility rules used across observation tasks.</p>
+
+                    <div class="knowledge-reference-scroll" role="region" tabindex="0" aria-label="Celestia: Display and render settings"><table class="knowledge-reference-table knowledge-settings-table">
+                      <caption class="sr-only">Celestia: Display and render settings</caption>
+                      <thead><tr><th scope="col">Setting</th><th scope="col">Value / rule</th><th scope="col">Meaning</th></tr></thead>
+                      <tbody><tr><th scope="row">Ambient Light</th><td>0–1.0; step: 0.05</td><td>Adjusts illumination in shadowed regions.</td></tr><tr><th scope="row">Stars Visible</th><td>Limiting magnitude: 0–15.0</td><td>Higher limits include fainter stars.</td></tr><tr><th scope="row">Star Style</th><td>Fuzzy Points / Points / Scaled Discs</td><td>Three supported ways to draw stars.</td></tr><tr><th scope="row">Equatorial Grid</th><td>Right ascension (RA), declination (Dec)</td><td>A sky grid based on Earth&#x27;s equator.</td></tr><tr><th scope="row">Horizontal Grid</th><td>Azimuth, altitude</td><td>A local sky grid that depends on the observer&#x27;s location.</td></tr><tr><th scope="row">Labels &amp; Orbits</th><td>Distance-sensitive</td><td>Enabled labels and orbits may appear only as you approach.</td></tr></tbody>
+                    </table></div>
+
+                  </div>
+                </article>
+              </div>
+            </div>
+            <div id="knowledge-panel-grass" class="knowledge-panel" role="tabpanel" aria-labelledby="knowledge-tab-grass" tabindex="0">
+              <div class="knowledge-panel-heading">
+                <h3>GRASS GIS</h3>
+                <p>Geospatial analysis</p>
+              </div>
+              <div class="knowledge-pair">
+                <article class="knowledge-card knowledge-card-skill" aria-labelledby="knowledge-skill-grass">
+                  <header class="knowledge-card-header">
+                    <strong>Skill</strong><span>Reusable procedure</span>
+                  </header>
+                  <div class="knowledge-card-body">
+                    <h4 id="knowledge-skill-grass">Display a filtered, labeled vector map</h4>
+                    <p class="knowledge-description">Select vector features by attribute and render their geometry with readable labels.</p>
+                    <ol class="knowledge-steps"><li><strong>Choose the map</strong><p>Prepare d.vect with the vector map name and display=shape in an active graphics frame.</p></li><li><strong>Filter the features</strong><p>Use cats for categories or where for an SQL condition, omitting the WHERE keyword.</p></li><li><strong>Set labels and colors</strong><p>Choose attribute_column for labels. Set feature and fill colors, or use -c for category-based random colors.</p></li><li><strong>Render the selection</strong><p>Run the assembled command. The library includes this example using the Spearfish soils map.</p></li></ol>
+                    <div class="knowledge-code"><span>Documented command</span><pre><code>d.vect -c map=soils where=&quot;label=&#x27;VBF&#x27;&quot; display=shape attribute_column=label</code></pre></div>
+                  </div>
+                </article>
+                <article class="knowledge-card knowledge-card-reference" aria-labelledby="knowledge-reference-grass">
+                  <header class="knowledge-card-header">
+                    <strong>Reference</strong><span>On-demand lookup</span>
+                  </header>
+                  <div class="knowledge-card-body">
+                    <h4 id="knowledge-reference-grass">d.vect parameters</h4>
+                    <p class="knowledge-description">Selected key=value parameters for input, filtering, styling, and labels.</p>
+                    <p class="knowledge-table-hint">10 selected parameters · Scroll to explore</p>
+                    <div class="knowledge-reference-scroll knowledge-parameter-scroll" role="region" tabindex="0" aria-label="GRASS GIS: d.vect parameters"><table class="knowledge-reference-table knowledge-parameter-table">
+                      <caption class="sr-only">GRASS GIS: d.vect parameters</caption>
+                      <thead><tr><th scope="col">Parameter</th><th scope="col">Value / default</th><th scope="col">Purpose</th></tr></thead>
+                      <tbody><tr><th scope="row"><code>map</code></th><td><code>name (required)</code></td><td>Vector map to display.</td></tr><tr><th scope="row"><code>layer</code></th><td><code>string; default: 1</code></td><td>Attribute-table layer number or name; -1 selects all layers.</td></tr><tr><th scope="row"><code>display</code></th><td><code>shape (default)</code></td><td>Draw geometry; other modes are cat, topo, vert, dir, and zcoor.</td></tr><tr><th scope="row"><code>type</code></th><td><code>point,line,area,face (default)</code></td><td>Select feature types; boundary and centroid are also supported.</td></tr><tr><th scope="row"><code>cats</code></th><td><code>1,3,7-9,13 (example)</code></td><td>Filter by category values or ranges.</td></tr><tr><th scope="row"><code>where</code></th><td><code>sql_query</code></td><td>Filter with an SQL condition, omitting the WHERE keyword.</td></tr><tr><th scope="row"><code>attribute_column</code></th><td><code>name</code></td><td>Column whose values appear as labels.</td></tr><tr><th scope="row"><code>color</code></th><td><code>0:29:57 (default)</code></td><td>Feature color: a named color, R:G:B triplet, or none.</td></tr><tr><th scope="row"><code>fill_color</code></th><td><code>0:103:204 (default)</code></td><td>Area fill color: a named color, R:G:B triplet, or none.</td></tr><tr><th scope="row"><code>label_size</code></th><td><code>integer; default: 8</code></td><td>Label size in pixels.</td></tr></tbody>
+                    </table></div>
+
+                  </div>
+                </article>
+              </div>
+            </div>
+            <div id="knowledge-panel-chimerax" class="knowledge-panel" role="tabpanel" aria-labelledby="knowledge-tab-chimerax" tabindex="0">
+              <div class="knowledge-panel-heading">
+                <h3>ChimeraX</h3>
+                <p>Molecular visualization</p>
+              </div>
+              <div class="knowledge-pair">
+                <article class="knowledge-card knowledge-card-skill" aria-labelledby="knowledge-skill-chimerax">
+                  <header class="knowledge-card-header">
+                    <strong>Skill</strong><span>Reusable procedure</span>
+                  </header>
+                  <div class="knowledge-card-body">
+                    <h4 id="knowledge-skill-chimerax">Show a selected residue as sticks</h4>
+                    <p class="knowledge-description">Use interactive selection to change the representation of one residue in a displayed structure.</p>
+                    <ol class="knowledge-steps"><li><strong>Select an atom</strong><p>With the default mouse assignment, Ctrl-click an atom in the desired residue to replace the previous selection.</p></li><li><strong>Expand to the residue</strong><p>Keep focus in the graphics window and press the up arrow once.</p></li><li><strong>Apply the representation</strong><p>Run style sel stick. The sel target limits the command to the current selection.</p></li></ol>
+                    <div class="knowledge-code"><span>Command for the current selection</span><pre><code>style sel stick</code></pre></div>
+                  </div>
+                </article>
+                <article class="knowledge-card knowledge-card-reference" aria-labelledby="knowledge-reference-chimerax">
+                  <header class="knowledge-card-header">
+                    <strong>Reference</strong><span>On-demand lookup</span>
+                  </header>
+                  <div class="knowledge-card-body">
+                    <h4 id="knowledge-reference-chimerax">Target specification syntax</h4>
+                    <p class="knowledge-description">Read targets from model to chain, residue, and atom. Combine these symbols in order to narrow the target.</p>
+
+                    <div class="knowledge-reference-scroll" role="region" tabindex="0" aria-label="ChimeraX: Target specification syntax"><table class="knowledge-reference-table knowledge-hierarchy-table">
+                      <caption class="sr-only">ChimeraX: Target specification syntax</caption>
+                      <thead><tr><th scope="col">Level</th><th scope="col">Syntax</th><th scope="col">Example</th></tr></thead>
+                      <tbody><tr><th scope="row">Model</th><td><code>#</code></td><td><code>#1</code></td></tr><tr><th scope="row">Chain</th><td><code>/</code></td><td><code>/A</code></td></tr><tr><th scope="row">Residue</th><td><code>:</code></td><td><code>:51</code></td></tr><tr><th scope="row">Atom</th><td><code>@</code></td><td><code>@ca</code></td></tr></tbody>
+                    </table></div>
+                    <div class="knowledge-reference-note"><h5>Example from the Reference</h5><code>#1,2:50,70-85@ca</code><p>CA atoms in residues 50 and 70–85 of models 1 and 2.</p></div><div class="knowledge-reference-note"><h5>Current selection</h5><code>sel</code><p>Target the currently selected items, independently of the hierarchy above.</p></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <div id="knowledge-panel-lean" class="knowledge-panel" role="tabpanel" aria-labelledby="knowledge-tab-lean" tabindex="0">
+              <div class="knowledge-panel-heading">
+                <h3>Lean 4</h3>
+                <p>Formal reasoning</p>
+              </div>
+              <div class="knowledge-pair">
+                <article class="knowledge-card knowledge-card-skill" aria-labelledby="knowledge-skill-lean">
+                  <header class="knowledge-card-header">
+                    <strong>Skill</strong><span>Reusable procedure</span>
+                  </header>
+                  <div class="knowledge-card-body">
+                    <h4 id="knowledge-skill-lean">Prove an equality by induction</h4>
+                    <p class="knowledge-description">Prove 0 + n = n by following the recursive structure of natural-number addition.</p>
+                    <ol class="knowledge-steps"><li><strong>State the goal</strong><p>Introduce n : Nat and begin the theorem&#x27;s tactic proof with by.</p></li><li><strong>Split the cases</strong><p>Use induction n with to create zero and successor branches, naming the induction hypothesis ih.</p></li><li><strong>Close the base case</strong><p>Use rfl when the zero case reduces to reflexive equality.</p></li><li><strong>Rewrite the successor case</strong><p>Apply the successor equation and then the induction hypothesis with rw [Nat.add_succ, ih].</p></li></ol>
+                    <div class="knowledge-code"><span>Proof from the library</span><pre><code>namespace Hidden
+
+theorem zero_add (n : Nat) : 0 + n = n := by
+  induction n with
+  | zero =&gt; rfl
+  | succ n ih =&gt; rw [Nat.add_succ, ih]
+
+end Hidden</code></pre></div>
+                  </div>
+                </article>
+                <article class="knowledge-card knowledge-card-reference" aria-labelledby="knowledge-reference-lean">
+                  <header class="knowledge-card-header">
+                    <strong>Reference</strong><span>On-demand lookup</span>
+                  </header>
+                  <div class="knowledge-card-body">
+                    <h4 id="knowledge-reference-lean">Tactic commands and goal effects</h4>
+                    <p class="knowledge-description">Reusable rules explain how individual tactics transform or close proof goals.</p>
+
+                    <table class="knowledge-reference-table">
+                      <caption class="sr-only">Lean 4: Tactic commands and goal effects</caption>
+                      <thead><tr><th scope="col">Entry</th><th scope="col">Meaning / constraint</th></tr></thead>
+                      <tbody><tr><th scope="row"><code>by</code></th><td>Enter tactic mode where a proof term is expected.</td></tr><tr><th scope="row"><code>rfl</code></th><td>Close a reflexive relation when its arguments are definitionally equal.</td></tr><tr><th scope="row"><code>rw [h]</code></th><td>Use an equality to substitute in a goal or hypothesis.</td></tr><tr><th scope="row"><code>rw [h₁, h₂]</code></th><td>Apply several rewrites in sequence.</td></tr><tr><th scope="row"><code>apply / exact</code></th><td>Apply an expression and create remaining goals, or supply a term that fills the goal exactly.</td></tr></tbody>
+                    </table>
+
+                  </div>
+                </article>
+              </div>
+            </div>
+            <div id="knowledge-panel-texstudio" class="knowledge-panel" role="tabpanel" aria-labelledby="knowledge-tab-texstudio" tabindex="0">
+              <div class="knowledge-panel-heading">
+                <h3>TeXstudio</h3>
+                <p>Scientific writing</p>
+              </div>
+              <div class="knowledge-pair">
+                <article class="knowledge-card knowledge-card-skill" aria-labelledby="knowledge-skill-texstudio">
+                  <header class="knowledge-card-header">
+                    <strong>Skill</strong><span>Reusable procedure</span>
+                  </header>
+                  <div class="knowledge-card-body">
+                    <h4 id="knowledge-skill-texstudio">Keep pdfLaTeX output in a build folder</h4>
+                    <p class="knowledge-description">Route generated files into a subfolder and keep TeXstudio&#x27;s log and PDF lookup in sync.</p>
+                    <ol class="knowledge-steps"><li><strong>Open configuration</strong><p>Open Options → Configure TeXstudio and show advanced options if the settings are hidden.</p></li><li><strong>Set the output folder</strong><p>Under Commands, add -output-directory=build to the pdfLaTeX command.</p></li><li><strong>Update the log search path</strong><p>Under Build → Build options, add build as an additional search folder for log files.</p></li><li><strong>Update the PDF search path</strong><p>Add build for PDF files too. The documented Clean Auxiliary Files dialog does not clean files stored in a different folder this way.</p></li></ol>
+                    <div class="knowledge-code"><span>pdfLaTeX command argument</span><pre><code>-output-directory=build</code></pre></div>
+                  </div>
+                </article>
+                <article class="knowledge-card knowledge-card-reference" aria-labelledby="knowledge-reference-texstudio">
+                  <header class="knowledge-card-header">
+                    <strong>Reference</strong><span>On-demand lookup</span>
+                  </header>
+                  <div class="knowledge-card-body">
+                    <h4 id="knowledge-reference-texstudio">Build and navigation shortcuts</h4>
+                    <p class="knowledge-description">Common shortcuts for compiling documents, viewing PDFs, and locating source positions or errors.</p>
+
+                    <table class="knowledge-reference-table">
+                      <caption class="sr-only">TeXstudio: Build and navigation shortcuts</caption>
+                      <thead><tr><th scope="col">Shortcut</th><th scope="col">Meaning / constraint</th></tr></thead>
+                      <tbody><tr><th scope="row"><code>F5</code></th><td>Build &amp; View: compile the document, then open the resulting PDF.</td></tr><tr><th scope="row"><code>F6</code></th><td>Compile the current document using its configured compiler.</td></tr><tr><th scope="row"><code>F7</code></th><td>Open the PDF viewer; with SyncTeX enabled, navigate to the current source position.</td></tr><tr><th scope="row"><code>Ctrl+left click</code></th><td>With SyncTeX enabled, jump from a source word to its PDF position, or from the PDF back to the corresponding source.</td></tr><tr><th scope="row"><code>Ctrl+Shift+↑ / ↓</code></th><td>Navigate to the previous or next reported error in the source and log.</td></tr></tbody>
+                    </table>
+
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+          <!-- knowledge-examples:end -->
+        </div>
+      </section>
+
+      <section id="results" class="research-section research-results" aria-labelledby="results-title">
+        <div class="research-inner">
+          <header class="research-heading">
+            <p class="research-eyebrow"><span aria-hidden="true">04 /</span> Main Results</p>
+            <h2 id="results-title">ScienceCUA improves task success rates.</h2>
+            <p class="research-lead">
+              We evaluate the initial Skills and References on 168 held-out ScienceBoard-Verified tasks across six scientific applications. ScienceCUA achieves the highest average success rate in all four model-based settings and both native-agent settings.
+            </p>
+          </header>
+
+          <dl class="results-highlights" aria-label="Main experimental findings">
+            <div>
+              <dt>Settings with the best average</dt>
+              <dd>6 <span>/ 6</span><small>Four model backbones and two native agents.</small></dd>
+            </div>
+            <div>
+              <dt>Model-based gains over Vanilla</dt>
+              <dd>+5.76–7.23 <span>pp</span><small>Absolute improvement in average success rate.</small></dd>
+            </div>
+            <div>
+              <dt>Codex with GPT-5.5</dt>
+              <dd>59.82<span>%</span><small>Up from 54.09% with Vanilla (+5.73 pp).</small></dd>
+            </div>
+          </dl>
+
+          <div class="results-table-heading">
+            <h3>Success rates on ScienceBoard-Verified</h3>
+            <a class="results-download" href="assets/data/main-results.csv" download>Download CSV <span aria-hidden="true">↓</span></a>
+          </div>
+          <p class="results-table-intro">Table 1 from the paper. Success rate (%) · Higher is better.</p>
+          <p class="results-scroll-hint">Scroll horizontally to view every application <span aria-hidden="true">↔</span></p>
+          <div class="results-table-wrap" role="region" aria-labelledby="model-results-caption" tabindex="0">
+            <table class="results-table">
+              <caption id="model-results-caption">Model-based evaluation</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Model</th>
+                  <th scope="col">Method</th>
+                  <th scope="col">KAlgebra</th>
+                  <th scope="col">Celestia</th>
+                  <th scope="col">GRASS GIS</th>
+                  <th scope="col">ChimeraX</th>
+                  <th scope="col">Lean 4</th>
+                  <th scope="col">TeXstudio</th>
+                  <th scope="col">Average</th>
+                </tr>
+              </thead>
+                <tbody>
+                  <tr>
+                    <th class="result-model" scope="rowgroup" rowspan="6">Qwen-3.8 Max<span>xhigh</span></th>
+                    <th class="result-method" scope="row">Vanilla</th>
+                    <td>32.26</td>
+                    <td>33.33</td>
+                    <td>29.41</td>
+                    <td>57.14</td>
+                    <td>30.77</td>
+                    <td>50.00</td>
+                    <td>38.82</td>
+                  </tr>
+                  <tr>
+                    <th class="result-method" scope="row">RAG</th>
+                    <td>38.71</td>
+                    <td>36.36</td>
+                    <td><strong>32.35</strong></td>
+                    <td>53.57</td>
+                    <td>30.77</td>
+                    <td>50.00</td>
+                    <td>40.29 <span class="result-change result-change-up">(↑ 3.79%)</span></td>
+                  </tr>
+                  <tr>
+                    <th class="result-method" scope="row">Direct injection</th>
+                    <td><strong>51.61</strong></td>
+                    <td><strong>45.45</strong></td>
+                    <td>26.47</td>
+                    <td><strong>64.29</strong></td>
+                    <td>26.92</td>
+                    <td>37.50</td>
+                    <td>42.04 <span class="result-change result-change-up">(↑ 8.29%)</span></td>
+                  </tr>
+                  <tr>
+                    <th class="result-method" scope="row">VisualSkill</th>
+                    <td>38.71</td>
+                    <td>33.33</td>
+                    <td><strong>32.35</strong></td>
+                    <td>57.14</td>
+                    <td>30.77</td>
+                    <td>50.00</td>
+                    <td>40.38 <span class="result-change result-change-up">(↑ 4.02%)</span></td>
+                  </tr>
+                  <tr>
+                    <th class="result-method" scope="row">SkillFoundry</th>
+                    <td>35.48</td>
+                    <td>36.36</td>
+                    <td>20.59</td>
+                    <td>53.57</td>
+                    <td><strong>34.62</strong></td>
+                    <td>50.00</td>
+                    <td>38.44 <span class="result-change result-change-down">(↓ 0.98%)</span></td>
+                  </tr>
+                  <tr class="result-ours">
+                    <th class="result-method" scope="row">ScienceCUA</th>
+                    <td><strong>51.61</strong></td>
+                    <td>36.36</td>
+                    <td><strong>32.35</strong></td>
+                    <td><strong>64.29</strong></td>
+                    <td>30.77</td>
+                    <td><strong>56.25</strong></td>
+                    <td><strong>45.27</strong> <span class="result-change result-change-up">(↑ 16.62%)</span></td>
+                  </tr>
+                </tbody>
+                <tbody>
+                  <tr>
+                    <th class="result-model" scope="rowgroup" rowspan="6">GLM-5.2<span>Max</span></th>
+                    <th class="result-method" scope="row">Vanilla</th>
+                    <td>19.35</td>
+                    <td>12.12</td>
+                    <td>0.00</td>
+                    <td>53.57</td>
+                    <td>3.85</td>
+                    <td>6.25</td>
+                    <td>15.86</td>
+                  </tr>
+                  <tr>
+                    <th class="result-method" scope="row">RAG</th>
+                    <td>22.58</td>
+                    <td><strong>18.18</strong></td>
+                    <td>0.00</td>
+                    <td>60.71</td>
+                    <td>3.85</td>
+                    <td><strong>12.50</strong></td>
+                    <td>19.64 <span class="result-change result-change-up">(↑ 23.83%)</span></td>
+                  </tr>
+                  <tr>
+                    <th class="result-method" scope="row">Direct injection</th>
+                    <td>25.81</td>
+                    <td>15.15</td>
+                    <td>0.00</td>
+                    <td>57.14</td>
+                    <td>0.00</td>
+                    <td>6.25</td>
+                    <td>17.39 <span class="result-change result-change-up">(↑ 9.65%)</span></td>
+                  </tr>
+                  <tr>
+                    <th class="result-method" scope="row">VisualSkill</th>
+                    <td><strong>29.03</strong></td>
+                    <td>9.09</td>
+                    <td>0.00</td>
+                    <td><strong>64.29</strong></td>
+                    <td><strong>7.69</strong></td>
+                    <td>6.25</td>
+                    <td>19.39 <span class="result-change result-change-up">(↑ 22.26%)</span></td>
+                  </tr>
+                  <tr>
+                    <th class="result-method" scope="row">SkillFoundry</th>
+                    <td>19.35</td>
+                    <td>12.12</td>
+                    <td><strong>2.94</strong></td>
+                    <td>50.00</td>
+                    <td>3.85</td>
+                    <td><strong>12.50</strong></td>
+                    <td>16.79 <span class="result-change result-change-up">(↑ 5.86%)</span></td>
+                  </tr>
+                  <tr class="result-ours">
+                    <th class="result-method" scope="row">ScienceCUA</th>
+                    <td><strong>29.03</strong></td>
+                    <td>15.15</td>
+                    <td><strong>2.94</strong></td>
+                    <td><strong>64.29</strong></td>
+                    <td><strong>7.69</strong></td>
+                    <td><strong>12.50</strong></td>
+                    <td><strong>21.93</strong> <span class="result-change result-change-up">(↑ 38.27%)</span></td>
+                  </tr>
+                </tbody>
+                <tbody>
+                  <tr>
+                    <th class="result-model" scope="rowgroup" rowspan="6">Grok-4.6<span>xhigh</span></th>
+                    <th class="result-method" scope="row">Vanilla</th>
+                    <td>61.29</td>
+                    <td>36.36</td>
+                    <td>14.71</td>
+                    <td>82.14</td>
+                    <td><strong>11.54</strong></td>
+                    <td>18.75</td>
+                    <td>37.47</td>
+                  </tr>
+                  <tr>
+                    <th class="result-method" scope="row">RAG</th>
+                    <td>70.97</td>
+                    <td>36.36</td>
+                    <td>20.59</td>
+                    <td>82.14</td>
+                    <td>7.69</td>
+                    <td><strong>31.25</strong></td>
+                    <td>41.50 <span class="result-change result-change-up">(↑ 10.76%)</span></td>
+                  </tr>
+                  <tr>
+                    <th class="result-method" scope="row">Direct injection</th>
+                    <td><strong>74.19</strong></td>
+                    <td>36.36</td>
+                    <td>23.53</td>
+                    <td>78.57</td>
+                    <td>7.69</td>
+                    <td>25.00</td>
+                    <td>40.89 <span class="result-change result-change-up">(↑ 9.13%)</span></td>
+                  </tr>
+                  <tr>
+                    <th class="result-method" scope="row">VisualSkill</th>
+                    <td>61.29</td>
+                    <td>36.36</td>
+                    <td>23.53</td>
+                    <td>78.57</td>
+                    <td><strong>11.54</strong></td>
+                    <td><strong>31.25</strong></td>
+                    <td>40.42 <span class="result-change result-change-up">(↑ 7.87%)</span></td>
+                  </tr>
+                  <tr>
+                    <th class="result-method" scope="row">SkillFoundry</th>
+                    <td>45.16</td>
+                    <td>33.33</td>
+                    <td>20.59</td>
+                    <td><strong>85.71</strong></td>
+                    <td><strong>11.54</strong></td>
+                    <td><strong>31.25</strong></td>
+                    <td>37.93 <span class="result-change result-change-up">(↑ 1.23%)</span></td>
+                  </tr>
+                  <tr class="result-ours">
+                    <th class="result-method" scope="row">ScienceCUA</th>
+                    <td>70.97</td>
+                    <td><strong>48.48</strong></td>
+                    <td><strong>26.47</strong></td>
+                    <td><strong>85.71</strong></td>
+                    <td><strong>11.54</strong></td>
+                    <td>25.00</td>
+                    <td><strong>44.70</strong> <span class="result-change result-change-up">(↑ 19.30%)</span></td>
+                  </tr>
+                </tbody>
+                <tbody>
+                  <tr>
+                    <th class="result-model" scope="rowgroup" rowspan="6">GPT-5.5<span>xhigh</span></th>
+                    <th class="result-method" scope="row">Vanilla</th>
+                    <td>58.06</td>
+                    <td>45.45</td>
+                    <td>52.94</td>
+                    <td>75.00</td>
+                    <td>26.92</td>
+                    <td><strong>50.00</strong></td>
+                    <td>51.40</td>
+                  </tr>
+                  <tr>
+                    <th class="result-method" scope="row">RAG</th>
+                    <td>64.52</td>
+                    <td>54.55</td>
+                    <td>50.00</td>
+                    <td><strong>78.57</strong></td>
+                    <td><strong>30.77</strong></td>
+                    <td><strong>50.00</strong></td>
+                    <td>54.73 <span class="result-change result-change-up">(↑ 6.48%)</span></td>
+                  </tr>
+                  <tr>
+                    <th class="result-method" scope="row">Direct injection</th>
+                    <td>67.74</td>
+                    <td>54.55</td>
+                    <td><strong>55.88</strong></td>
+                    <td>75.00</td>
+                    <td>23.08</td>
+                    <td>43.75</td>
+                    <td>53.33 <span class="result-change result-change-up">(↑ 3.75%)</span></td>
+                  </tr>
+                  <tr>
+                    <th class="result-method" scope="row">VisualSkill</th>
+                    <td>64.52</td>
+                    <td>57.58</td>
+                    <td>52.94</td>
+                    <td>75.00</td>
+                    <td>26.92</td>
+                    <td><strong>50.00</strong></td>
+                    <td>54.49 <span class="result-change result-change-up">(↑ 6.01%)</span></td>
+                  </tr>
+                  <tr>
+                    <th class="result-method" scope="row">SkillFoundry</th>
+                    <td>61.29</td>
+                    <td>54.55</td>
+                    <td>50.00</td>
+                    <td><strong>78.57</strong></td>
+                    <td>26.92</td>
+                    <td><strong>50.00</strong></td>
+                    <td>53.56 <span class="result-change result-change-up">(↑ 4.20%)</span></td>
+                  </tr>
+                  <tr class="result-ours">
+                    <th class="result-method" scope="row">ScienceCUA</th>
+                    <td><strong>70.97</strong></td>
+                    <td><strong>60.61</strong></td>
+                    <td><strong>55.88</strong></td>
+                    <td><strong>78.57</strong></td>
+                    <td>26.92</td>
+                    <td><strong>50.00</strong></td>
+                    <td><strong>57.16</strong> <span class="result-change result-change-up">(↑ 11.21%)</span></td>
+                  </tr>
+                </tbody>
+            </table>
+          </div>
+
+          <div class="results-table-wrap" role="region" aria-labelledby="agent-results-caption" tabindex="0">
+            <table class="results-table">
+              <caption id="agent-results-caption">Native-agent evaluation</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Agent</th>
+                  <th scope="col">Method</th>
+                  <th scope="col">KAlgebra</th>
+                  <th scope="col">Celestia</th>
+                  <th scope="col">GRASS GIS</th>
+                  <th scope="col">ChimeraX</th>
+                  <th scope="col">Lean 4</th>
+                  <th scope="col">TeXstudio</th>
+                  <th scope="col">Average</th>
+                </tr>
+              </thead>
+                <tbody>
+                  <tr>
+                    <th class="result-model" scope="rowgroup" rowspan="4">Grok Build<span>Grok-4.6 · xhigh</span></th>
+                    <th class="result-method" scope="row">Vanilla</th>
+                    <td>70.97</td>
+                    <td>42.42</td>
+                    <td>35.29</td>
+                    <td>78.57</td>
+                    <td>19.23</td>
+                    <td>31.25</td>
+                    <td>46.29</td>
+                  </tr>
+                  <tr>
+                    <th class="result-method" scope="row">VisualSkill</th>
+                    <td>70.97</td>
+                    <td>63.64</td>
+                    <td>35.29</td>
+                    <td>75.00</td>
+                    <td>26.92</td>
+                    <td>31.25</td>
+                    <td>50.51 <span class="result-change result-change-up">(↑ 9.12%)</span></td>
+                  </tr>
+                  <tr>
+                    <th class="result-method" scope="row">SkillFoundry</th>
+                    <td>64.52</td>
+                    <td>51.52</td>
+                    <td>26.47</td>
+                    <td>78.57</td>
+                    <td><strong>30.77</strong></td>
+                    <td><strong>43.75</strong></td>
+                    <td>49.27 <span class="result-change result-change-up">(↑ 6.44%)</span></td>
+                  </tr>
+                  <tr class="result-ours">
+                    <th class="result-method" scope="row">ScienceCUA</th>
+                    <td><strong>77.42</strong></td>
+                    <td><strong>66.67</strong></td>
+                    <td><strong>38.24</strong></td>
+                    <td><strong>85.71</strong></td>
+                    <td>26.92</td>
+                    <td>37.50</td>
+                    <td><strong>55.41</strong> <span class="result-change result-change-up">(↑ 19.70%)</span></td>
+                  </tr>
+                </tbody>
+                <tbody>
+                  <tr>
+                    <th class="result-model" scope="rowgroup" rowspan="4">Codex<span>GPT-5.5 · xhigh</span></th>
+                    <th class="result-method" scope="row">Vanilla</th>
+                    <td>58.06</td>
+                    <td>51.52</td>
+                    <td>52.94</td>
+                    <td>75.00</td>
+                    <td><strong>30.77</strong></td>
+                    <td><strong>56.25</strong></td>
+                    <td>54.09</td>
+                  </tr>
+                  <tr>
+                    <th class="result-method" scope="row">VisualSkill</th>
+                    <td>61.29</td>
+                    <td>57.58</td>
+                    <td>55.88</td>
+                    <td><strong>78.57</strong></td>
+                    <td>26.92</td>
+                    <td><strong>56.25</strong></td>
+                    <td>56.08 <span class="result-change result-change-up">(↑ 3.68%)</span></td>
+                  </tr>
+                  <tr>
+                    <th class="result-method" scope="row">SkillFoundry</th>
+                    <td>61.29</td>
+                    <td>54.55</td>
+                    <td>55.88</td>
+                    <td>75.00</td>
+                    <td><strong>30.77</strong></td>
+                    <td>50.00</td>
+                    <td>54.58 <span class="result-change result-change-up">(↑ 0.91%)</span></td>
+                  </tr>
+                  <tr class="result-ours">
+                    <th class="result-method" scope="row">ScienceCUA</th>
+                    <td><strong>70.97</strong></td>
+                    <td><strong>60.61</strong></td>
+                    <td><strong>61.76</strong></td>
+                    <td><strong>78.57</strong></td>
+                    <td><strong>30.77</strong></td>
+                    <td><strong>56.25</strong></td>
+                    <td><strong>59.82</strong> <span class="result-change result-change-up">(↑ 10.59%)</span></td>
+                  </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="evolution" class="research-section research-evolution" aria-labelledby="evolution-title">
+        <div class="research-inner">
+          <header class="research-heading">
+            <p class="research-eyebrow"><span aria-hidden="true">05 /</span> Two-Stage Gains</p>
+            <h2 id="evolution-title">Two stages. Higher task success.</h2>
+            <p class="research-lead">Resource-to-Skill Construction turns documentation into the initial Skills and References. Skill self-evolution then refines this library using execution feedback. Each stage improves average task success on both backbones.</p>
+          </header>
+
+          <div class="evolution-controls">
+            <div class="evolution-tabs" role="tablist" aria-label="Select a model backbone">
+              <button id="evolution-tab-grok" role="tab" type="button" aria-selected="true" aria-controls="evolution-panel-grok">Grok-4.6 <span>(xhigh)</span></button>
+              <button id="evolution-tab-gpt" role="tab" type="button" aria-selected="false" aria-controls="evolution-panel-gpt" tabindex="-1">GPT-5.5 <span>(xhigh)</span></button>
+            </div>
+            <div class="evolution-legend" aria-label="Chart legend">
+              <span><i class="evolution-key-vanilla" aria-hidden="true"></i>Vanilla</span>
+              <span><i class="evolution-key-initial" aria-hidden="true"></i>Initial library <small>Stage 1</small></span>
+              <span><i class="evolution-key-full" aria-hidden="true"></i>Full ScienceCUA <small>Stage 2</small></span>
+            </div>
+          </div>
+          <div id="evolution-panel-grok" class="evolution-panel" role="tabpanel" aria-labelledby="evolution-tab-grok" tabindex="0">
+            <div class="evolution-chart-meta">
+              <p><strong>Grok-4.6</strong> · Success rate (%)</p>
+              <p class="evolution-average-summary">37.47% <span aria-hidden="true">→</span> 44.70% <span aria-hidden="true">→</span> 54.59% average <strong>+17.12 pp total</strong></p>
+            </div>
+            <ol class="evolution-chart" aria-label="Vanilla, Initial library, and Full ScienceCUA success rates by application">
+              <li class="evolution-domain">
+                <div class="evolution-plot" role="img" aria-label="KAlgebra: Vanilla 61.29 percent; Initial library 70.97 percent; Full ScienceCUA 80.65 percent.">
+                  <div class="evolution-bar evolution-bar-vanilla" style="--score: 61.29" data-value="61.29" aria-hidden="true"><span>61.29</span></div>
+                  <div class="evolution-bar evolution-bar-initial" style="--score: 70.97" data-value="70.97" aria-hidden="true"><span>70.97</span></div>
+                  <div class="evolution-bar evolution-bar-full" style="--score: 80.65" data-value="80.65" aria-hidden="true"><span>80.65</span></div>
+                </div>
+                <p class="evolution-domain-name">KAlgebra</p>
+                <p class="evolution-gains">
+                  <span class="evolution-gain-stage1" aria-label="Stage 1 gain: +9.68 pp">S1 +9.68 pp</span>
+                  <span class="evolution-gain-stage2" aria-label="Stage 2 gain: +9.68 pp">S2 +9.68 pp</span>
+                </p>
+              </li>
+              <li class="evolution-domain">
+                <div class="evolution-plot" role="img" aria-label="Celestia: Vanilla 36.36 percent; Initial library 48.48 percent; Full ScienceCUA 63.64 percent.">
+                  <div class="evolution-bar evolution-bar-vanilla" style="--score: 36.36" data-value="36.36" aria-hidden="true"><span>36.36</span></div>
+                  <div class="evolution-bar evolution-bar-initial" style="--score: 48.48" data-value="48.48" aria-hidden="true"><span>48.48</span></div>
+                  <div class="evolution-bar evolution-bar-full" style="--score: 63.64" data-value="63.64" aria-hidden="true"><span>63.64</span></div>
+                </div>
+                <p class="evolution-domain-name">Celestia</p>
+                <p class="evolution-gains">
+                  <span class="evolution-gain-stage1" aria-label="Stage 1 gain: +12.12 pp">S1 +12.12 pp</span>
+                  <span class="evolution-gain-stage2" aria-label="Stage 2 gain: +15.16 pp">S2 +15.16 pp</span>
+                </p>
+              </li>
+              <li class="evolution-domain">
+                <div class="evolution-plot" role="img" aria-label="GRASS GIS: Vanilla 14.71 percent; Initial library 26.47 percent; Full ScienceCUA 47.06 percent.">
+                  <div class="evolution-bar evolution-bar-vanilla" style="--score: 14.71" data-value="14.71" aria-hidden="true"><span>14.71</span></div>
+                  <div class="evolution-bar evolution-bar-initial" style="--score: 26.47" data-value="26.47" aria-hidden="true"><span>26.47</span></div>
+                  <div class="evolution-bar evolution-bar-full" style="--score: 47.06" data-value="47.06" aria-hidden="true"><span>47.06</span></div>
+                </div>
+                <p class="evolution-domain-name">GRASS GIS</p>
+                <p class="evolution-gains">
+                  <span class="evolution-gain-stage1" aria-label="Stage 1 gain: +11.76 pp">S1 +11.76 pp</span>
+                  <span class="evolution-gain-stage2" aria-label="Stage 2 gain: +20.59 pp">S2 +20.59 pp</span>
+                </p>
+              </li>
+              <li class="evolution-domain">
+                <div class="evolution-plot" role="img" aria-label="ChimeraX: Vanilla 82.14 percent; Initial library 85.71 percent; Full ScienceCUA 85.71 percent.">
+                  <div class="evolution-bar evolution-bar-vanilla" style="--score: 82.14" data-value="82.14" aria-hidden="true"><span>82.14</span></div>
+                  <div class="evolution-bar evolution-bar-initial" style="--score: 85.71" data-value="85.71" aria-hidden="true"><span>85.71</span></div>
+                  <div class="evolution-bar evolution-bar-full" style="--score: 85.71" data-value="85.71" aria-hidden="true"><span>85.71</span></div>
+                </div>
+                <p class="evolution-domain-name">ChimeraX</p>
+                <p class="evolution-gains">
+                  <span class="evolution-gain-stage1" aria-label="Stage 1 gain: +3.57 pp">S1 +3.57 pp</span>
+                  <span class="evolution-gain-stage2" aria-label="Stage 2 gain: 0.00 pp">S2 0.00 pp</span>
+                </p>
+              </li>
+              <li class="evolution-domain">
+                <div class="evolution-plot" role="img" aria-label="Lean 4: Vanilla 11.54 percent; Initial library 11.54 percent; Full ScienceCUA 19.23 percent.">
+                  <div class="evolution-bar evolution-bar-vanilla" style="--score: 11.54" data-value="11.54" aria-hidden="true"><span>11.54</span></div>
+                  <div class="evolution-bar evolution-bar-initial" style="--score: 11.54" data-value="11.54" aria-hidden="true"><span>11.54</span></div>
+                  <div class="evolution-bar evolution-bar-full" style="--score: 19.23" data-value="19.23" aria-hidden="true"><span>19.23</span></div>
+                </div>
+                <p class="evolution-domain-name">Lean 4</p>
+                <p class="evolution-gains">
+                  <span class="evolution-gain-stage1" aria-label="Stage 1 gain: 0.00 pp">S1 0.00 pp</span>
+                  <span class="evolution-gain-stage2" aria-label="Stage 2 gain: +7.69 pp">S2 +7.69 pp</span>
+                </p>
+              </li>
+              <li class="evolution-domain">
+                <div class="evolution-plot" role="img" aria-label="TeXstudio: Vanilla 18.75 percent; Initial library 25.00 percent; Full ScienceCUA 31.25 percent.">
+                  <div class="evolution-bar evolution-bar-vanilla" style="--score: 18.75" data-value="18.75" aria-hidden="true"><span>18.75</span></div>
+                  <div class="evolution-bar evolution-bar-initial" style="--score: 25.00" data-value="25.00" aria-hidden="true"><span>25.00</span></div>
+                  <div class="evolution-bar evolution-bar-full" style="--score: 31.25" data-value="31.25" aria-hidden="true"><span>31.25</span></div>
+                </div>
+                <p class="evolution-domain-name">TeXstudio</p>
+                <p class="evolution-gains">
+                  <span class="evolution-gain-stage1" aria-label="Stage 1 gain: +6.25 pp">S1 +6.25 pp</span>
+                  <span class="evolution-gain-stage2" aria-label="Stage 2 gain: +6.25 pp">S2 +6.25 pp</span>
+                </p>
+              </li>
+              <li class="evolution-domain evolution-domain-average">
+                <div class="evolution-plot" role="img" aria-label="Average: Vanilla 37.47 percent; Initial library 44.70 percent; Full ScienceCUA 54.59 percent.">
+                  <div class="evolution-bar evolution-bar-vanilla" style="--score: 37.47" data-value="37.47" aria-hidden="true"><span>37.47</span></div>
+                  <div class="evolution-bar evolution-bar-initial" style="--score: 44.70" data-value="44.70" aria-hidden="true"><span>44.70</span></div>
+                  <div class="evolution-bar evolution-bar-full" style="--score: 54.59" data-value="54.59" aria-hidden="true"><span>54.59</span></div>
+                </div>
+                <p class="evolution-domain-name">Average</p>
+                <p class="evolution-gains">
+                  <span class="evolution-gain-stage1" aria-label="Stage 1 gain: +7.23 pp">S1 +7.23 pp</span>
+                  <span class="evolution-gain-stage2" aria-label="Stage 2 gain: +9.89 pp">S2 +9.89 pp</span>
+                </p>
+              </li>
+            </ol>
+          </div>
+          <div id="evolution-panel-gpt" class="evolution-panel" role="tabpanel" aria-labelledby="evolution-tab-gpt" tabindex="0" hidden>
+            <div class="evolution-chart-meta">
+              <p><strong>GPT-5.5</strong> · Success rate (%)</p>
+              <p class="evolution-average-summary">51.40% <span aria-hidden="true">→</span> 57.16% <span aria-hidden="true">→</span> 65.81% average <strong>+14.41 pp total</strong></p>
+            </div>
+            <ol class="evolution-chart" aria-label="Vanilla, Initial library, and Full ScienceCUA success rates by application">
+              <li class="evolution-domain">
+                <div class="evolution-plot" role="img" aria-label="KAlgebra: Vanilla 58.06 percent; Initial library 70.97 percent; Full ScienceCUA 83.87 percent.">
+                  <div class="evolution-bar evolution-bar-vanilla" style="--score: 58.06" data-value="58.06" aria-hidden="true"><span>58.06</span></div>
+                  <div class="evolution-bar evolution-bar-initial" style="--score: 70.97" data-value="70.97" aria-hidden="true"><span>70.97</span></div>
+                  <div class="evolution-bar evolution-bar-full" style="--score: 83.87" data-value="83.87" aria-hidden="true"><span>83.87</span></div>
+                </div>
+                <p class="evolution-domain-name">KAlgebra</p>
+                <p class="evolution-gains">
+                  <span class="evolution-gain-stage1" aria-label="Stage 1 gain: +12.91 pp">S1 +12.91 pp</span>
+                  <span class="evolution-gain-stage2" aria-label="Stage 2 gain: +12.90 pp">S2 +12.90 pp</span>
+                </p>
+              </li>
+              <li class="evolution-domain">
+                <div class="evolution-plot" role="img" aria-label="Celestia: Vanilla 45.45 percent; Initial library 60.61 percent; Full ScienceCUA 69.70 percent.">
+                  <div class="evolution-bar evolution-bar-vanilla" style="--score: 45.45" data-value="45.45" aria-hidden="true"><span>45.45</span></div>
+                  <div class="evolution-bar evolution-bar-initial" style="--score: 60.61" data-value="60.61" aria-hidden="true"><span>60.61</span></div>
+                  <div class="evolution-bar evolution-bar-full" style="--score: 69.70" data-value="69.70" aria-hidden="true"><span>69.70</span></div>
+                </div>
+                <p class="evolution-domain-name">Celestia</p>
+                <p class="evolution-gains">
+                  <span class="evolution-gain-stage1" aria-label="Stage 1 gain: +15.16 pp">S1 +15.16 pp</span>
+                  <span class="evolution-gain-stage2" aria-label="Stage 2 gain: +9.09 pp">S2 +9.09 pp</span>
+                </p>
+              </li>
+              <li class="evolution-domain">
+                <div class="evolution-plot" role="img" aria-label="GRASS GIS: Vanilla 52.94 percent; Initial library 55.88 percent; Full ScienceCUA 64.71 percent.">
+                  <div class="evolution-bar evolution-bar-vanilla" style="--score: 52.94" data-value="52.94" aria-hidden="true"><span>52.94</span></div>
+                  <div class="evolution-bar evolution-bar-initial" style="--score: 55.88" data-value="55.88" aria-hidden="true"><span>55.88</span></div>
+                  <div class="evolution-bar evolution-bar-full" style="--score: 64.71" data-value="64.71" aria-hidden="true"><span>64.71</span></div>
+                </div>
+                <p class="evolution-domain-name">GRASS GIS</p>
+                <p class="evolution-gains">
+                  <span class="evolution-gain-stage1" aria-label="Stage 1 gain: +2.94 pp">S1 +2.94 pp</span>
+                  <span class="evolution-gain-stage2" aria-label="Stage 2 gain: +8.83 pp">S2 +8.83 pp</span>
+                </p>
+              </li>
+              <li class="evolution-domain">
+                <div class="evolution-plot" role="img" aria-label="ChimeraX: Vanilla 75.00 percent; Initial library 78.57 percent; Full ScienceCUA 85.71 percent.">
+                  <div class="evolution-bar evolution-bar-vanilla" style="--score: 75.00" data-value="75.00" aria-hidden="true"><span>75.00</span></div>
+                  <div class="evolution-bar evolution-bar-initial" style="--score: 78.57" data-value="78.57" aria-hidden="true"><span>78.57</span></div>
+                  <div class="evolution-bar evolution-bar-full" style="--score: 85.71" data-value="85.71" aria-hidden="true"><span>85.71</span></div>
+                </div>
+                <p class="evolution-domain-name">ChimeraX</p>
+                <p class="evolution-gains">
+                  <span class="evolution-gain-stage1" aria-label="Stage 1 gain: +3.57 pp">S1 +3.57 pp</span>
+                  <span class="evolution-gain-stage2" aria-label="Stage 2 gain: +7.14 pp">S2 +7.14 pp</span>
+                </p>
+              </li>
+              <li class="evolution-domain">
+                <div class="evolution-plot" role="img" aria-label="Lean 4: Vanilla 26.92 percent; Initial library 26.92 percent; Full ScienceCUA 34.62 percent.">
+                  <div class="evolution-bar evolution-bar-vanilla" style="--score: 26.92" data-value="26.92" aria-hidden="true"><span>26.92</span></div>
+                  <div class="evolution-bar evolution-bar-initial" style="--score: 26.92" data-value="26.92" aria-hidden="true"><span>26.92</span></div>
+                  <div class="evolution-bar evolution-bar-full" style="--score: 34.62" data-value="34.62" aria-hidden="true"><span>34.62</span></div>
+                </div>
+                <p class="evolution-domain-name">Lean 4</p>
+                <p class="evolution-gains">
+                  <span class="evolution-gain-stage1" aria-label="Stage 1 gain: 0.00 pp">S1 0.00 pp</span>
+                  <span class="evolution-gain-stage2" aria-label="Stage 2 gain: +7.70 pp">S2 +7.70 pp</span>
+                </p>
+              </li>
+              <li class="evolution-domain">
+                <div class="evolution-plot" role="img" aria-label="TeXstudio: Vanilla 50.00 percent; Initial library 50.00 percent; Full ScienceCUA 56.25 percent.">
+                  <div class="evolution-bar evolution-bar-vanilla" style="--score: 50.00" data-value="50.00" aria-hidden="true"><span>50.00</span></div>
+                  <div class="evolution-bar evolution-bar-initial" style="--score: 50.00" data-value="50.00" aria-hidden="true"><span>50.00</span></div>
+                  <div class="evolution-bar evolution-bar-full" style="--score: 56.25" data-value="56.25" aria-hidden="true"><span>56.25</span></div>
+                </div>
+                <p class="evolution-domain-name">TeXstudio</p>
+                <p class="evolution-gains">
+                  <span class="evolution-gain-stage1" aria-label="Stage 1 gain: 0.00 pp">S1 0.00 pp</span>
+                  <span class="evolution-gain-stage2" aria-label="Stage 2 gain: +6.25 pp">S2 +6.25 pp</span>
+                </p>
+              </li>
+              <li class="evolution-domain evolution-domain-average">
+                <div class="evolution-plot" role="img" aria-label="Average: Vanilla 51.40 percent; Initial library 57.16 percent; Full ScienceCUA 65.81 percent.">
+                  <div class="evolution-bar evolution-bar-vanilla" style="--score: 51.40" data-value="51.40" aria-hidden="true"><span>51.40</span></div>
+                  <div class="evolution-bar evolution-bar-initial" style="--score: 57.16" data-value="57.16" aria-hidden="true"><span>57.16</span></div>
+                  <div class="evolution-bar evolution-bar-full" style="--score: 65.81" data-value="65.81" aria-hidden="true"><span>65.81</span></div>
+                </div>
+                <p class="evolution-domain-name">Average</p>
+                <p class="evolution-gains">
+                  <span class="evolution-gain-stage1" aria-label="Stage 1 gain: +5.76 pp">S1 +5.76 pp</span>
+                  <span class="evolution-gain-stage2" aria-label="Stage 2 gain: +8.65 pp">S2 +8.65 pp</span>
+                </p>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="build-skills-dialog" id="build-skills-dialog" aria-labelledby="build-skills-title" lang="en">
+      <div class="build-skills-panel">
+        <header class="build-skills-header">
+          <p class="build-skills-eyebrow">ScienceCUA / Build Skills</p>
+          <h2 id="build-skills-title" tabindex="-1" autofocus>Welcome to ScienceCUA Build Skills</h2>
+          <button class="build-skills-close" type="button" aria-label="Close introduction">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg>
+          </button>
+        </header>
+
+        <div class="build-skills-content">
+          <div class="build-skills-languages" role="tablist" aria-label="Introduction language">
+            <button id="build-skills-tab-en" type="button" role="tab" aria-selected="true" aria-controls="build-skills-intro-en" lang="en">English</button>
+            <button id="build-skills-tab-zh" type="button" role="tab" aria-selected="false" aria-controls="build-skills-intro-zh" tabindex="-1" lang="zh-CN">中文</button>
+          </div>
+
+          <div id="build-skills-intro-en" class="build-skills-intro" role="tabpanel" aria-labelledby="build-skills-tab-en" lang="en" tabindex="0">
+            <ol class="build-skills-notes">
+              <li>
+                <h3>Build knowledge from documentation</h3>
+                <p>Upload human-authored PDF documents or provide HTML web pages, and let ScienceCUA organize their software knowledge into reusable <strong>Skills</strong> and <strong>References</strong> for on-demand lookup.</p>
+              </li>
+              <li>
+                <h3>Configure your API key</h3>
+                <p>The online service requires your own model provider API key. We take your key’s security seriously and are committed to protecting it. We will not publish your key or disclose it to unauthorized third parties.</p>
+              </li>
+              <li>
+                <h3>Self-hosting is also available</h3>
+                <p>If you prefer to run the system in your own environment, you can deploy our <a href="https://github.com/DeepAutonomy-AI/ScienceCUA" target="_blank" rel="noopener noreferrer">open-source code</a> locally and manage your API keys and input materials yourself.</p>
+              </li>
+              <li>
+                <h3>Feedback and contributions are welcome</h3>
+                <p>PDF documents and HTML pages vary widely in structure, making it challenging to design a general-purpose pipeline that handles every case. We’re sorry if our pipeline or its outputs fall short of your expectations. Please open a <a href="https://github.com/DeepAutonomy-AI/ScienceCUA/issues" target="_blank" rel="noopener noreferrer">GitHub Issue</a> to report problems or share suggestions.</p>
+              </li>
+            </ol>
+          </div>
+
+          <div id="build-skills-intro-zh" class="build-skills-intro" role="tabpanel" aria-labelledby="build-skills-tab-zh" lang="zh-CN" tabindex="0" hidden>
+            <ol class="build-skills-notes">
+              <li>
+                <h3>从文档构建知识</h3>
+                <p>上传人类编写的 PDF 文档或提供 HTML 网页，让 ScienceCUA 将其中的软件知识整理为可复用的 <strong>Skills</strong> 和可按需查询的 <strong>References</strong>。</p>
+              </li>
+              <li>
+                <h3>配置您的 API 密钥</h3>
+                <p>在线体验需要您填写自己的模型服务 API 密钥。我们重视您的密钥安全，并承诺妥善保护，不公开或向未经授权的第三方披露您的密钥。</p>
+              </li>
+              <li>
+                <h3>也可选择本地部署</h3>
+                <p>如果您更希望在自己的环境中使用，欢迎通过已<a href="https://github.com/DeepAutonomy-AI/ScienceCUA" target="_blank" rel="noopener noreferrer">开源的代码</a>进行本地部署，自行管理 API 密钥和输入资料。</p>
+              </li>
+              <li>
+                <h3>欢迎反馈与贡献</h3>
+                <p>PDF 文档和 HTML 网页的结构多种多样，要设计一套能适应所有情况的通用处理流程并不容易。如果我们的流程或生成结果未达到您的预期，我们深感抱歉。欢迎在 GitHub <a href="https://github.com/DeepAutonomy-AI/ScienceCUA/issues" target="_blank" rel="noopener noreferrer">提交 Issue</a>，反馈问题或提出建议。</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <footer class="build-skills-actions">
+          <button class="button build-skills-back" type="button">Back</button>
+          <a class="button primary build-skills-continue" href="https://miller-edwards-stable-networking.trycloudflare.com/">
+            <span>Continue</span>
+            <svg class="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+          </a>
+        </footer>
+      </div>
+    </dialog>
+
+    <dialog class="contact-dialog" id="contact-dialog" aria-labelledby="contact-title">
+      <div class="contact-panel">
+        <button class="contact-close" type="button" aria-label="Close contact dialog" autofocus>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <path d="m6 6 12 12M6 18 18 6"/>
+          </svg>
+        </button>
+
+        <h2 id="contact-title">Contact Us</h2>
+
+        <div class="contact-grid">
+          <article class="contact-card" aria-labelledby="contact-daiqiang">
+            <div class="contact-person">
+              <p class="contact-role">First author</p>
+              <h3 id="contact-daiqiang">Daiqiang Li</h3>
+            </div>
+            <a class="contact-email" href="mailto:lidaiqiang@sjtu.edu.cn">lidaiqiang@sjtu.edu.cn</a>
+            <div class="contact-card-actions">
+              <a class="contact-send" href="mailto:lidaiqiang@sjtu.edu.cn">
+                Send email
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+              </a>
+              <button class="contact-copy" type="button" data-copy-email="lidaiqiang@sjtu.edu.cn" aria-label="Copy email for Daiqiang Li">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="3"/><path d="M15 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h2"/></svg>
+                <span>Copy</span>
+              </button>
+            </div>
+          </article>
+
+          <article class="contact-card" aria-labelledby="contact-mingrui">
+            <div class="contact-person">
+              <p class="contact-role">Corresponding author</p>
+              <h3 id="contact-mingrui">Mingrui Luo</h3>
+            </div>
+            <a class="contact-email" href="mailto:luomingrui2020@ia.ac.cn">luomingrui2020@ia.ac.cn</a>
+            <div class="contact-card-actions">
+              <a class="contact-send" href="mailto:luomingrui2020@ia.ac.cn">
+                Send email
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+              </a>
+              <button class="contact-copy" type="button" data-copy-email="luomingrui2020@ia.ac.cn" aria-label="Copy email for Mingrui Luo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="3"/><path d="M15 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h2"/></svg>
+                <span>Copy</span>
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <p class="contact-status" id="contact-status" role="status" aria-live="polite"></p>
+      </div>
+    </dialog>
+  </body>
+</html>

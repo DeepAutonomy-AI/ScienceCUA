@@ -1,0 +1,2 @@
+# Keep the website's published data despite the research app's data/ exclusion.
+!assets/data/

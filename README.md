@@ -8,6 +8,9 @@
 
 Turn scientific software documentation into reusable Skills and queryable References.
 
+The static paper website and local preview instructions are available in
+[`website/`](website/README.md).
+
 <a name="overview"></a>
 
 ## 🧭 Overview
