@@ -1,6 +1,6 @@
 # ScienceCUA
 
-[![Project Page](https://img.shields.io/badge/Project_Page-ScienceCUA-007EC6?style=flat-square)](https://hszd-team.github.io/ScienceCUA-website/)
+[![Project Page](https://img.shields.io/badge/Project_Page-ScienceCUA-007EC6?style=flat-square)](https://deepautonomy-ai.github.io/ScienceCUA-website/)
 [![Paper](https://img.shields.io/badge/Paper-arXiv%3A%202611.03238-B31B1B?style=flat-square&logo=arxiv)](https://arxiv.org/abs/2611.03238)
 [![Benchmark Environment](https://img.shields.io/badge/Benchmark_Environment-Hugging_Face-FFD21E?style=flat-square&logo=huggingface)](https://huggingface.co/lidaiqiang/ScienceBoard_Verified_Env)
 
@@ -34,7 +34,7 @@ Installation and startup have been verified on Windows with Python 3.12.
 From PowerShell:
 
 ```powershell
-git clone https://github.com/HSZD-Team/ScienceCUA.git
+git clone https://github.com/DeepAutonomy-AI/ScienceCUA.git
 cd ScienceCUA
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -e .
